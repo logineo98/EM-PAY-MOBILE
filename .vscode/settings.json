@@ -5,7 +5,28 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true
+        "**/Thumbs.db": true,
+        "node_modules": true,
+        ".bundle": true,
+        "__tests__": true,
+        ".vscode": true,
+        "ios": true,
+        ".eslintrc.js": true,
+        ".gitignore": true,
+        ".prettierrc.js": true,
+        ".watchmanconfig": true,
+        "android": true
     },
-    "hide-files.files": []
+    "hide-files.files": [
+        "node_modules",
+        ".bundle",
+        "__tests__",
+        ".vscode",
+        "ios",
+        ".eslintrc.js",
+        ".gitignore",
+        ".prettierrc.js",
+        ".watchmanconfig",
+        "android"
+    ]
 }

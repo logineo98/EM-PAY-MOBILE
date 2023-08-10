@@ -1,17 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import BottomNavigation from './navigation/bottom_navigation'
 import SideNavigation from './navigation/side_navigation'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { components } from '../../components'
 
 const Navigation = () => {
-    const stack = createNativeStackNavigator()
+    const Drawer = createDrawerNavigator()
 
     return (
-        <stack.Navigator screenOptions={{ headerShown: true }}>
-            <stack.Screen name='side' component={SideNavigation} />
-            <stack.Screen name='bottom' component={BottomNavigation} />
-        </stack.Navigator>
+        <Drawer.Navigator initialRouteName='bottom'
+            drawerContent={(props) => <components.cards.customDrawerContent />}
+        >
+            <Drawer.Screen name='bottom' component={BottomNavigation} />
+            <Drawer.Screen name='side' component={SideNavigation} />
+        </Drawer.Navigator>
     )
 }
 

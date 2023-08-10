@@ -7,10 +7,10 @@ import AuthStack from './stacks/auth_stack';
 
 const RootNavigation = () => {
     const root = createNativeStackNavigator();
-    const host = false;
+    const host = true;
 
     return (
-        <NavigationContainer>
+        <NavigationContainer >
             <root.Navigator screenOptions={{ headerShown: false }}>
                 {host ?
                     <root.Screen name='main' component={Navigation} />

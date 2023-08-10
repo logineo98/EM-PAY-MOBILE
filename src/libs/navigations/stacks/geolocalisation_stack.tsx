@@ -5,7 +5,7 @@ const GeolocalisationStack = () => {
     const stack = createNativeStackNavigator()
 
     return (
-        <stack.Navigator screenOptions={{ headerShown: true }}>
+        <stack.Navigator screenOptions={{ headerShown: false }}>
             <stack.Screen name='geolocalisation' component={Screens.geolocalisation} />
         </stack.Navigator>
     )

@@ -5,7 +5,7 @@ const ServiceClientStack = () => {
     const stack = createNativeStackNavigator()
 
     return (
-        <stack.Navigator screenOptions={{ headerShown: true }}>
+        <stack.Navigator screenOptions={{ headerShown: false }}>
             <stack.Screen name='service_client' component={Screens.serviceClient} />
         </stack.Navigator>
     )
