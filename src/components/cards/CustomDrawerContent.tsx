@@ -3,8 +3,6 @@ import React from 'react'
 
 const CustomDrawerContent = () => {
 
-
-
     return (
         <ScrollView style={styles.container}>
             <Text>CustomDrawerContent</Text>
