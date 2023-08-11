@@ -10,7 +10,7 @@ const Navigation = () => {
 
     return (
         <Drawer.Navigator initialRouteName='bottom'
-            drawerContent={(props) => <components.cards.customDrawerContent />}
+            drawerContent={({ navigation }) => <components.cards.customDrawerContent navigation={navigation} />}
         >
             <Drawer.Screen name='bottom' component={BottomNavigation} />
             <Drawer.Screen name='side' component={SideNavigation} />

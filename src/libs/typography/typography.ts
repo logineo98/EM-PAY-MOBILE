@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native"
+
 export const roboto = {
     black: 'Roboto-Black',
     blackItalic: 'Roboto-BlackItalic',
@@ -17,5 +19,10 @@ export const colors = {
     fond1: '#F78FC2',
     fond2: '#FDCFD9',
 
-    black: "#000000"
+    white: "#ffffff",
+    black: "#000000",
+    auth_icon: "rgba(0,0,0,0.5)",
+    placeholder: "rgba(0,0,0,0.2)",
 }
+
+export const { height, width } = Dimensions.get('window')
