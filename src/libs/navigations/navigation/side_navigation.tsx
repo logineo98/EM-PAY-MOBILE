@@ -7,7 +7,7 @@ const SideNavigation = () => {
     const Drawer = createDrawerNavigator()
 
     return (
-        <Drawer.Navigator initialRouteName='home'>
+        <Drawer.Navigator initialRouteName='home' screenOptions={{ headerShown: false }}>
             <Drawer.Screen name='home' component={Screens.Others.home} />
             <Drawer.Screen name='homes' component={Screens.Others.home} />
 

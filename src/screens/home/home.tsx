@@ -12,6 +12,6 @@ const Home = () => {
     )
 }
 
-export default Home
-
 const styles = StyleSheet.create({})
+
+export default Home
