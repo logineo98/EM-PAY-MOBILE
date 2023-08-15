@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Partenaires = () => {
+const Partenaire = () => {
+
     return (
         <View>
-            <Text>Partenaires</Text>
+            <Text>Partenaire</Text>
         </View>
     )
 }
 
-export default Partenaires
-
 const styles = StyleSheet.create({})
+
+export default Partenaire

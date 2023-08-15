@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Tarifs = () => {
+const Tarif = () => {
     return (
         <View>
             <Text>Tarif</Text>
@@ -9,6 +9,6 @@ const Tarifs = () => {
     )
 }
 
-export default Tarifs
-
 const styles = StyleSheet.create({})
+
+export default Tarif
