@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 const Home = () => {
     return (
-        <View style={{ flex: 1 }}>
-            <Text style={{ color: 'red' }}>Home</Text>
-            <Text>aaaaaaaaaaaaaa</Text>
-            <Text>Home</Text>
-            <Text>Home</Text>
+        <View style={styles.home_container}>
+            <ScrollView showsHorizontalScrollIndicator={false}>
+
+            </ScrollView>
         </View>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    home_container: { flex: 1, padding: 10 }
+})
 
 export default Home

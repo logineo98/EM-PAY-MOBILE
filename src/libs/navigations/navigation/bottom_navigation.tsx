@@ -1,4 +1,4 @@
-import { StyleSheet, } from 'react-native'
+import { StyleSheet, Text, } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import GeolocalisationStack from '../stacks/geolocalisation_stack'
@@ -16,21 +16,21 @@ const BottomNavigation = () => {
             <BottomTab.Screen name='home_stack' component={HomeStack} options={{ tabBarItemStyle: { display: 'none' } }} />
 
             <BottomTab.Screen name='geolocalisation_stack' component={GeolocalisationStack} options={{
-                title: 'Carte géolocalisation',
                 tabBarLabelStyle: { fontFamily: roboto.regular },
-                tabBarIcon: (({ color, focused, size }) => { color = focused ? colors.fond1 : colors.black; return <MaterialCommunityIcons name='map-marker-radius-outline' color={color} /> })
+                tabBarIcon: (({ color, focused, size }) => { /*size = size - 2;*/ color = focused ? colors.fond1 : colors.black; return <MaterialCommunityIcons name='map-marker-radius-outline' color={color} size={size} /> }),
+                tabBarLabel: ({ focused, color }) => { color = focused ? colors.fond1 : colors.black; return <Text style={{ color, fontSize: 10 }}>Carte géolocalisation</Text> },
             }} />
 
             <BottomTab.Screen name='historique_stack' component={HistoriqueStack} options={{
-                title: 'Historique',
                 tabBarLabelStyle: { fontFamily: roboto.regular },
-                tabBarIcon: (({ color, focused, size }) => { color = focused ? colors.fond1 : colors.black; return <MaterialCommunityIcons name='history' color={color} /> })
+                tabBarIcon: (({ color, focused, size }) => { /*size = size - 2;*/ color = focused ? colors.fond1 : colors.black; return <MaterialCommunityIcons name='history' color={color} size={size} /> }),
+                tabBarLabel: ({ focused, color }) => { color = focused ? colors.fond1 : colors.black; return <Text style={{ color, fontSize: 10 }}>Historique</Text> },
             }} />
 
             <BottomTab.Screen name='service_client_stack' component={ServiceClientStack} options={{
-                title: 'Service client',
                 tabBarLabelStyle: { fontFamily: roboto.regular },
-                tabBarIcon: (({ color, focused, size }) => { color = focused ? colors.fond1 : colors.black; return <MaterialCommunityIcons name='phone-outgoing' color={color} /> })
+                tabBarIcon: (({ color, focused, size }) => { /*size = size - 2;*/ color = focused ? colors.fond1 : colors.black; return <MaterialCommunityIcons name='phone-outgoing' color={color} size={size} /> }),
+                tabBarLabel: ({ focused, color }) => { color = focused ? colors.fond1 : colors.black; return <Text style={{ color, fontSize: 10 }}>Service client</Text> },
             }} />
 
         </BottomTab.Navigator>
