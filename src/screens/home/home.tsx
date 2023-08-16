@@ -5,6 +5,7 @@ import { colors, roboto, width } from '../../libs/typography/typography'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { StackNavigationHelpers } from '@react-navigation/stack/lib/typescript/src/types'
+import { components } from '../../components'
 
 const Item = (item: { logo: ImageProps, name: string }) => (
     <View style={styles.partenaire_logo_container}>
@@ -30,7 +31,7 @@ const Home: FC<{ navigation: StackNavigationHelpers, }> = ({ navigation }) => {
     ]
 
     return (
-        <View style={styles.home_container}>
+        <components.commons.screen_container>
             <ScrollView showsHorizontalScrollIndicator={false}>
                 <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container}>
                     <View style={styles.virtual_card_container}>
@@ -100,7 +101,7 @@ const Home: FC<{ navigation: StackNavigationHelpers, }> = ({ navigation }) => {
                     />
                 </View>
             </ScrollView>
-        </View>
+        </components.commons.screen_container>
     )
 }
 
