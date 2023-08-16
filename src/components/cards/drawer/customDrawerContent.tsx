@@ -87,7 +87,7 @@ const CustomDrawerContent: FC<{ navigation: DrawerNavigationHelpers }> = ({ navi
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 10, position: 'relative', },
+    container: { flex: 1, padding: 10, },
 
     logo_container: { alignItems: 'center' },
     logo: { height: width * 0.30, width: width * 0.30, resizeMode: 'contain', },

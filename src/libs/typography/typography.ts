@@ -23,6 +23,7 @@ export const colors = {
     black: "#000000",
     auth_icon: "rgba(0,0,0,0.5)",
     placeholder: "rgba(0,0,0,0.2)",
+    divider: "rgba(0,0,0,0.2)",
 }
 
 export const { height, width } = Dimensions.get('window')

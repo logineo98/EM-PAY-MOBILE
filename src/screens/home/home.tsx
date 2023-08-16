@@ -7,15 +7,13 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { StackNavigationHelpers } from '@react-navigation/stack/lib/typescript/src/types'
 import { components } from '../../components'
 
-const Item = (item: { logo: ImageProps, name: string }) => (
+const Item = (item: { logo: ImageProps, name: string, description: string }) => (
     <View style={styles.partenaire_logo_container}>
         <Image source={item.logo} style={styles.partenaire_logo} />
     </View>
 )
 
 const Home: FC<{ navigation: StackNavigationHelpers, }> = ({ navigation }) => {
-    console.log(width * 0.17)
-    // console.log(navigation.getState())
 
     const partenaires = [
         { id: '1', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
@@ -94,7 +92,7 @@ const Home: FC<{ navigation: StackNavigationHelpers, }> = ({ navigation }) => {
                 <View style={styles.partenaire_container}>
                     <FlatList
                         data={partenaires}
-                        renderItem={({ item }) => <Item logo={item.logo} name={item.name} />}
+                        renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
                         keyExtractor={item => item.id}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}

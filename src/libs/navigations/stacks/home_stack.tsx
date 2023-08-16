@@ -13,7 +13,7 @@ const HomeStack = () => {
             <stack.Screen name='facture' component={Screens.Home.facture} />
             <stack.Screen name='recharge' component={Screens.Home.recharge} />
             <stack.Screen name='partenaire' component={Screens.Home.partenaire} />
-            <stack.Screen name='a_propos' component={Screens.Home.partenaire} />
+            <stack.Screen name='a_propos' component={Screens.Home.a_propos} />
             <stack.Screen name='tarif' component={Screens.Home.tarif} />
             <stack.Screen name='status' component={Screens.Home.status} />
         </stack.Navigator>
