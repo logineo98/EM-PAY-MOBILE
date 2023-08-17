@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     partenaire_logo_container: { height: width * 0.17, width: width * 0.17, },
     partenaire_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.17 },
     partenaire_name: { color: colors.black, fontFamily: roboto.black, marginLeft: 10, textTransform: 'uppercase' },
-    partenaire_description: { color: colors.black, fontFamily: roboto.regular, textAlign: 'justify', },
+    partenaire_description: { color: colors.black, fontFamily: roboto.regular, textAlign: 'justify', fontSize: 13 },
 
     bottom_sheet_container: { borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 15, width: width, height: height / 2, position: 'absolute', bottom: 0, },
 

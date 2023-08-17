@@ -1,8 +1,7 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import React from 'react'
 import { components } from '../../components'
 import { images } from '../../libs/constants/constants'
-import { colors, roboto } from '../../libs/typography/typography'
 
 const Partenaire = () => {
 

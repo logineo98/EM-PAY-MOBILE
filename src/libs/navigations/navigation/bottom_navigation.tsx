@@ -12,7 +12,7 @@ const BottomNavigation = () => {
     const BottomTab = createBottomTabNavigator()
 
     return (
-        <BottomTab.Navigator screenOptions={{ headerShown: false }} initialRouteName='home_stack'>
+        <BottomTab.Navigator screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }} initialRouteName='home_stack'>
             <BottomTab.Screen name='home_stack' component={HomeStack} options={{ tabBarItemStyle: { display: 'none' } }} />
 
             <BottomTab.Screen name='geolocalisation_stack' component={GeolocalisationStack} options={{

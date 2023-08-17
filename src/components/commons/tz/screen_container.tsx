@@ -19,7 +19,7 @@ const ScreenContainer: FC<COMPONENT_TYPE> = ({ children, style, title }) => (
 const styles = StyleSheet.create({
     container_global: { flex: 1, padding: 10 },
     container: { flex: 1, },
-    screen_title: { color: colors.black, fontFamily: roboto.black, fontSize: 25, textAlign: 'center', marginBottom: 10, },
+    screen_title: { color: colors.black, fontFamily: roboto.black, fontSize: 25, textAlign: 'center', textTransform: 'uppercase', marginBottom: 10, },
 })
 
 export default ScreenContainer
