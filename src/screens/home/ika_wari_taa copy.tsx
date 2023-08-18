@@ -1,29 +1,12 @@
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { components } from '../../components'
 import { colors, roboto } from '../../libs/typography/typography'
 import QRCode from 'react-native-qrcode-svg'
-import { Camera, useCameraDevices, useFrameProcessor } from 'react-native-vision-camera'
-import { BarcodeFormat, scanBarcodes, useScanBarcodes } from 'vision-camera-code-scanner'
 
 const IkaWariTaa = () => {
 
     const [showQrCode, setShowQrCode] = useState(false)
-    const [hasPermission, setHasPermission] = useState(false)
-
-    const devices = useCameraDevices()
-    const device = devices.back
-
-    // const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], { checkInverted: true })
-
-    useEffect(() => {
-        (async () => {
-            const status = await Camera.requestCameraPermission()
-            setHasPermission(status === 'authorized')
-        })()
-    }, [])
-
-    console.log(hasPermission)
 
     return (
         <components.commons.screen_container title='Ika Wari Taa'>
@@ -38,17 +21,6 @@ const IkaWariTaa = () => {
                     <View style={styles.qr_code}>
                         {showQrCode && <QRCode value='Tz Nation 13' size={150} />}
 
-                        {device != null && hasPermission && !showQrCode && (
-                            <>
-                                <Camera
-                                    style={StyleSheet.absoluteFill}
-                                    device={device}
-                                    isActive={true}
-                                    // frameProcessor={frameProcessor}
-                                    frameProcessorFps={5}
-                                />
-                            </>
-                        )}
                     </View>
                 </View>
 

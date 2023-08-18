@@ -1,4 +1,5 @@
 import CustomDrawerContent from "./cards/drawer/customDrawerContent";
+import FactureCard from "./cards/facture/facture_card";
 import PartenaireCard from "./cards/partenaire/partenaire_card";
 import TarifCard from "./cards/tarif/tarif_card";
 import Header from "./commons/header/header";
@@ -13,5 +14,6 @@ export const components = {
         customDrawerContent: CustomDrawerContent,
         partenaire_card: PartenaireCard,
         tarif_card: TarifCard,
+        facture_card: FactureCard,
     }
 }

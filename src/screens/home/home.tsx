@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
 
     menu_home_container: { flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', marginBottom: 10 },
     menu_home: { alignItems: 'center' },
-    menu_icon_container: { height: width * 0.17, width: width * 0.17, padding: 10, borderRadius: width * 0.17, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: colors.fond1, },
-    menu_icon: {},
+    menu_icon_container: { height: width * 0.17, width: width * 0.17, },
+    menu_icon: { height: '100%', width: '100%', borderRadius: width * 0.17, borderWidth: 1, borderColor: colors.fond1, textAlign: 'center', verticalAlign: 'middle' },
     menu_name: { color: colors.black, fontFamily: roboto.regular, fontSize: 10 },
 
     historique_container: { marginTop: 10, marginBottom: 20, },

@@ -14,8 +14,7 @@
         ".eslintrc.js": true,
         ".gitignore": true,
         ".prettierrc.js": true,
-        ".watchmanconfig": true,
-        "android": true
+        ".watchmanconfig": true
     },
     "hide-files.files": [
         "node_modules",
@@ -26,7 +25,6 @@
         ".eslintrc.js",
         ".gitignore",
         ".prettierrc.js",
-        ".watchmanconfig",
-        "android"
+        ".watchmanconfig"
     ]
 }

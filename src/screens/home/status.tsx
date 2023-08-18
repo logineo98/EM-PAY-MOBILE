@@ -10,7 +10,7 @@ const Status = () => {
 
     return (
         <components.commons.screen_container title='Statuts'>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
                 <View style={styles.visibility_container}>
                     <Text style={styles.visibility_name}>STATUT</Text>
                     <Switch value={checked} onValueChange={(value) => setChecked(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={checked ? colors.fond1 : '#f4f3f4'} />
