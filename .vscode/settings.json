@@ -10,21 +10,21 @@
         ".bundle": true,
         "__tests__": true,
         ".vscode": true,
-        "ios": true,
         ".eslintrc.js": true,
         ".gitignore": true,
         ".prettierrc.js": true,
-        ".watchmanconfig": true
+        ".watchmanconfig": true,
+        "ios": true
     },
     "hide-files.files": [
         "node_modules",
         ".bundle",
         "__tests__",
         ".vscode",
-        "ios",
         ".eslintrc.js",
         ".gitignore",
         ".prettierrc.js",
-        ".watchmanconfig"
+        ".watchmanconfig",
+        "ios"
     ]
 }

@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: "com.google.gms.google-services"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -73,9 +74,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.empay"
+    namespace "com.emploietmoi.empay"
     defaultConfig {
-        applicationId "com.empay"
+        applicationId "com.emploietmoi.empay"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -121,9 +122,6 @@ dependencies {
     }
 
     // my add dependencies
-    // implementation(project(':react-native-onesignal')){
-    //     exclude group: 'com.google.android.gms'
-    // }
     implementation(project(':react-native-maps')){
         exclude group: 'com.google.android.gms'
     }

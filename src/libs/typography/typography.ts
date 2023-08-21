@@ -24,6 +24,7 @@ export const colors = {
     auth_icon: "rgba(0,0,0,0.5)",
     placeholder: "rgba(0,0,0,0.2)",
     divider: "rgba(0,0,0,0.2)",
+    tz_blue: '#0459B5'
 }
 
 export const { height, width } = Dimensions.get('window')

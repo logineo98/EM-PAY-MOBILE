@@ -6,4 +6,5 @@ export const images = {
     somagep: require('../assets/images/somagep.jpg'),
     startimes: require('../assets/images/startimes.jpg'),
     vitepay: require('../assets/images/vitepay.png'),
+    marker: require('../assets/images/marker.png'),
 }

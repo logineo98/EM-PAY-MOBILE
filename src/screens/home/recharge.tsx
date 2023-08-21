@@ -13,12 +13,10 @@ const Recharge = () => {
 
     const toggleOverlay = () => setVisible(!visible)
 
-    console.log((width * 0.45) / 2)
-
     return (
         <components.commons.screen_container title='Recharges'>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
-                <Text style={styles.info_message}>Veuillez cliquer sur le bouton 'RECHARGER' afin de recharger votre compte.</Text>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
+                <Text style={styles.info_message}>Veuillez cliquer sur le bouton 'RECHARGER' afin de recharger votre compte avec Vitepay.</Text>
 
                 <TouchableOpacity activeOpacity={0.5} style={styles.btn} onPress={() => { setVisible(true) }}>
                     <Text style={styles.btn_name}>Recharger</Text>
@@ -34,14 +32,14 @@ const Recharge = () => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.vitepay_texte_container}>
+                    {/* <View style={styles.vitepay_texte_container}>
                         <Text style={styles.vitepay_title}>VITEPAY</Text>
                         <Text style={styles.vitepay_description}>Achat chez vitepay</Text>
-                    </View>
+                    </View> */}
 
                     <View style={styles.divider} />
 
-                    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{}} keyboardShouldPersistTaps={'handled'}>
+                    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{}} keyboardShouldPersistTaps='handled'>
                         <View style={styles.input_container}>
                             <Text style={styles.input_title}>Téléphone</Text>
                             <TextInput keyboardType='numeric' style={styles.input} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'Numéro orange (sans l\'indicatif)'} value={phone} onChangeText={text => setPhone(text)} />
@@ -49,10 +47,14 @@ const Recharge = () => {
                         </View>
 
                         <View style={styles.input_container}>
-                            <Text style={styles.input_title}>Téléphone</Text>
+                            <Text style={styles.input_title}>Montant (FCFA)</Text>
                             <TextInput keyboardType='numeric' style={styles.input} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'Numéro orange (sans l\'indicatif)'} value={phone} onChangeText={text => setPhone(text)} />
-                            <Text style={styles.input_error}>Numero de téléphone non conforme</Text>
+                            <Text style={styles.input_error}>Montant non conforme</Text>
                         </View>
+
+                        <TouchableOpacity activeOpacity={0.5} style={[styles.btn, { marginBottom: 10, backgroundColor: colors.tz_blue, }]} onPress={() => { setVisible(true) }}>
+                            <Text style={styles.btn_name}>Recharger</Text>
+                        </TouchableOpacity>
                     </ScrollView>
                 </Overlay>
             </ScrollView>
@@ -66,9 +68,9 @@ const styles = StyleSheet.create({
     info_message: { color: colors.black, fontFamily: roboto.regular, textAlign: 'justify', marginBottom: 50, },
 
     btn: { backgroundColor: colors.fond1, paddingVertical: 10, paddingHorizontal: 20, borderRadius: 10, },
-    btn_name: { color: colors.white, fontFamily: roboto.black, textTransform: 'uppercase', },
+    btn_name: { color: colors.white, fontFamily: roboto.black, textAlign: 'center', textTransform: 'uppercase', },
 
-    bottom_sheet_container: { borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 15, width: width, height: height / 2, position: 'absolute', bottom: 0, },
+    bottom_sheet_container: { borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 15, width: width, height: height * 0.53, position: 'absolute', bottom: 0, },
 
     vitepay_logo_close_container: { position: 'relative', alignItems: 'center', marginTop: -(width * 0.45) / 2 },
     vitepay_logo_container: { height: width * 0.45, width: width * 0.45, },
@@ -82,10 +84,15 @@ const styles = StyleSheet.create({
 
     divider: { height: 2, backgroundColor: colors.divider, marginVertical: 10, },
 
-    input_container: { borderWidth: 1, padding: 10, paddingBottom: 5, borderRadius: 10, marginBottom: 10, },
-    input_title: { fontSize: 20, color: colors.black, },
-    input: { color: colors.black, },
-    input_error: { fontSize: 10, color: colors.fond1 },
+    // input_container: { borderWidth: 1, padding: 10, paddingBottom: 5, borderRadius: 10, marginBottom: 10, },
+    // input_title: { fontSize: 20, color: colors.black, },
+    // input: { color: colors.black, },
+    // input_error: { fontSize: 10, color: colors.fond1 },
+
+    input_container: { padding: 5, borderRadius: 5, borderWidth: 1, marginBottom: 10, },
+    input_title: { color: colors.black, fontFamily: roboto.black, },
+    input: { height: 40, color: colors.black, fontFamily: roboto.regular, fontSize: 13, },
+    input_error: { color: colors.fond1, fontFamily: roboto.italic, fontSize: 10, },
 })
 
 export default Recharge
