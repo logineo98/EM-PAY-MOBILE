@@ -27,15 +27,16 @@ const PartenaireCard: FC<COMPONENT_TYPE> = ({ logo, name, description }) => {
                 <View style={styles.bottom_sheet_header}>
                     <Text style={styles.detail}>Détails</Text>
                     <TouchableOpacity activeOpacity={0.5} onPress={() => { setVisible(false) }}>
-                        <MaterialCommunityIcons name='close' color={colors.black} size={30} style={styles.close} />
+                        <MaterialCommunityIcons name='close' color={colors.fond1} size={30} style={styles.close} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.divider} />
 
-                <ScrollView>
-                    <Text style={styles.bottom_sheet_content_name}>  {name}  </Text>
-                    <Text style={styles.bottom_sheet_content_description}>  {description}  </Text>
+                <Text style={styles.bottom_sheet_content_name}> {name} </Text>
+
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{}}>
+                    <Text style={styles.bottom_sheet_content_description}> {description} </Text>
                 </ScrollView>
             </Overlay>
         </View>
@@ -44,7 +45,7 @@ const PartenaireCard: FC<COMPONENT_TYPE> = ({ logo, name, description }) => {
 
 const styles = StyleSheet.create({
     partenaire_container: { marginBottom: 10 },
-    partenaire: { backgroundColor: colors.white, padding: 10, borderWidth: 1, borderColor: colors.fond1, borderRadius: 10 },
+    partenaire: { backgroundColor: colors.white, padding: 10, borderWidth: 1, borderColor: colors.fond1, borderRadius: 10, },
     partenaire_logo_name: { flexDirection: 'row', alignItems: 'center', },
     partenaire_logo_container: { height: width * 0.17, width: width * 0.17, },
     partenaire_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.17 },
@@ -55,11 +56,11 @@ const styles = StyleSheet.create({
 
     bottom_sheet_header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', },
     detail: { color: colors.black, fontFamily: roboto.black, },
-    close: { color: colors.black, },
+    close: {},
 
-    divider: { height: 1, borderWidth: 1, borderColor: colors.divider, marginBottom: 10, },
+    divider: { height: 2, backgroundColor: colors.divider, },
 
-    bottom_sheet_content_name: { color: colors.black, fontFamily: roboto.black, marginBottom: 10, textTransform: 'uppercase', },
+    bottom_sheet_content_name: { color: colors.black, fontFamily: roboto.black, marginVertical: 5, textTransform: 'uppercase', },
     bottom_sheet_content_description: { color: colors.black, fontFamily: roboto.regular, textAlign: 'justify', },
 })
 

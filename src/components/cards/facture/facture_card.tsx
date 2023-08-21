@@ -19,7 +19,7 @@ const FactureCard: FC<COMPONENT_TYPE> = ({ logo, name }) => {
 const styles = StyleSheet.create({
     facture_container: { backgroundColor: colors.white, marginBottom: 10, flexDirection: 'row', alignItems: 'center', padding: 10, borderWidth: 1, borderColor: colors.fond1, borderRadius: 10 },
     facture_logo_container: { height: width * 0.17, width: width * 0.17, },
-    facture_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.17 },
+    facture_logo: { height: '100%', width: '100%', resizeMode: 'cover', },
     facture_name: { color: colors.black, fontFamily: roboto.black, marginLeft: 10, },
 })
 

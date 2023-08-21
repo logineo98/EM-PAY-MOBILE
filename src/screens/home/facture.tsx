@@ -6,11 +6,11 @@ import { images } from '../../libs/constants/constants'
 const Facture = () => {
 
     const factures = [
-        { id: '1', logo: images.logo_png, name: 'Canal +', },
-        { id: '2', logo: images.logo_png, name: 'Facture EDM', },
-        { id: '3', logo: images.logo_png, name: 'ISAGO', },
-        { id: '4', logo: images.logo_png, name: 'Somagep', },
-        { id: '5', logo: images.logo_png, name: 'StarTimes', },
+        { id: '1', logo: images.canal_plus, name: 'Canal +', },
+        { id: '2', logo: images.edm, name: 'Facture EDM', },
+        { id: '3', logo: images.edm, name: 'ISAGO', },
+        { id: '4', logo: images.somagep, name: 'Somagep', },
+        { id: '5', logo: images.startimes, name: 'StarTimes', },
     ]
 
     return (
