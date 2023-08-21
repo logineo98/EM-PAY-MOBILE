@@ -12,14 +12,13 @@ const HomeStack = ({ navigation, route }: any) => {
 
     useEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route)
-        routeName && setScreen(routeName as string)
+        routeName && setScreen(routeName)
     }, [route])
 
     useEffect(() => {
         (async () => {
-            try {
-                await AsyncStorage.setItem('route_name', route ? screen : 'home')
-            } catch (error: any) { }
+            try { await AsyncStorage.setItem('route_name', screen) }
+            catch (error: any) { }
         })()
     }, [screen])
 
