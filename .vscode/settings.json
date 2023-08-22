@@ -5,26 +5,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "node_modules": true,
-        ".bundle": true,
-        "__tests__": true,
-        ".vscode": true,
-        ".eslintrc.js": true,
-        ".gitignore": true,
-        ".prettierrc.js": true,
-        ".watchmanconfig": true,
-        "ios": true
+        "**/Thumbs.db": true
     },
-    "hide-files.files": [
-        "node_modules",
-        ".bundle",
-        "__tests__",
-        ".vscode",
-        ".eslintrc.js",
-        ".gitignore",
-        ".prettierrc.js",
-        ".watchmanconfig",
-        "ios"
-    ]
+    "hide-files.files": []
 }

@@ -4,7 +4,7 @@ import { components } from '../../components'
 import { colors, roboto } from '../../libs/typography/typography'
 import QRCode from 'react-native-qrcode-svg'
 import { Camera, useCameraDevices, useFrameProcessor } from 'react-native-vision-camera'
-import { BarcodeFormat, scanBarcodes, useScanBarcodes } from 'vision-camera-code-scanner'
+// import { BarcodeFormat, scanBarcodes, useScanBarcodes } from 'vision-camera-code-scanner'
 
 const IkaWariTaa = () => {
 

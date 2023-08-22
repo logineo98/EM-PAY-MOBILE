@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Page from './src/screens/page'
 import RootNavigation from './src/libs/navigations/root_navigation'
 
 const App = () => {

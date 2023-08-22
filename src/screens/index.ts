@@ -1,4 +1,6 @@
-import Login from "./auth/login";
+import Connexion from "./auth/connexion";
+import Inscription from "./auth/inscription";
+import Welcome from "./auth/welcome";
 import Geolocalisation from "./bottom_nav_screens/geolocalisation";
 import Historique from "./bottom_nav_screens/historique";
 import ServiceClient from "./bottom_nav_screens/service_client";
@@ -18,7 +20,9 @@ export const Screens = {
 
     Others: {},
     Auth: {
-        login: Login
+        welcome: Welcome,
+        login: Connexion,
+        inscription: Inscription,
     },
     Home: {
         home: Home,
