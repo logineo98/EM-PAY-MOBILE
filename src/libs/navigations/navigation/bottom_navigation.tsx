@@ -1,5 +1,5 @@
 import { StyleSheet, Text, } from 'react-native'
-import React from 'react'
+import React, { FC } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import GeolocalisationStack from '../stacks/geolocalisation_stack'
 import HistoriqueStack from '../stacks/historique_stack'
@@ -8,12 +8,14 @@ import HomeStack from '../stacks/home_stack'
 import { colors, roboto } from '../../typography/typography'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const BottomNavigation = () => {
+type COMPONENT_TYPE = { setScreenName: React.Dispatch<React.SetStateAction<string>> }
+
+const BottomNavigation: FC<COMPONENT_TYPE> = ({ setScreenName }) => {
     const BottomTab = createBottomTabNavigator()
 
     return (
         <BottomTab.Navigator screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }} initialRouteName='home_stack'>
-            <BottomTab.Screen name='home_stack' component={HomeStack} options={{ tabBarItemStyle: { display: 'none' } }} />
+            <BottomTab.Screen name='home_stack' children={({ route }) => <HomeStack route={route} setScreenName={setScreenName} />} options={{ tabBarItemStyle: { display: 'none' } }} />
 
             <BottomTab.Screen name='geolocalisation_stack' component={GeolocalisationStack} options={{
                 tabBarLabelStyle: { fontFamily: roboto.regular },

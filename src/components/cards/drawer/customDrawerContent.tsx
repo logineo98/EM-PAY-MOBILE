@@ -7,7 +7,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-const CustomDrawerContent: FC<{ navigation: DrawerNavigationHelpers }> = ({ navigation }) => {
+type COMPONENT_TYPE = { navigation: DrawerNavigationHelpers, screenName: string }
+
+const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => {
 
     const call = () => {
         let phoneNumber = ''
@@ -43,44 +45,68 @@ const CustomDrawerContent: FC<{ navigation: DrawerNavigationHelpers }> = ({ navi
 
             <View style={styles.item_global_container}>
                 <ScrollView contentContainerStyle={{}}>
-                    <TouchableOpacity style={{ ...styles.item_container, marginTop: 10 }} activeOpacity={0.5} onPress={() => navigation.navigate('home')}>
+                    <TouchableOpacity style={[styles.item_container, { marginTop: 10, backgroundColor: (!screenName || screenName === 'home') ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('home')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
-                            <Text style={styles.item_name}>Acceuil</Text>
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={(!screenName || screenName === 'home') ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: (!screenName || screenName === 'home') ? colors.white : colors.black, }]}>Acceuil</Text>
                         </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={(!screenName || screenName === 'home') ? colors.white : colors.black} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.item_container} activeOpacity={0.5} onPress={() => navigation.navigate('status')}>
+                    {/* <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'ika_wari_taa' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('ika_wari_taa')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
-                            <Text style={styles.item_name}>Statut</Text>
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'ika_wari_taa' ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: screenName === 'ika_wari_taa' ? colors.white : colors.black, }]}>Ika Wari Taa</Text>
                         </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'ika_wari_taa' ? colors.white : colors.black} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.item_container} activeOpacity={0.5} onPress={() => navigation.navigate('tarif')}>
+                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'facture' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('facture')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
-                            <Text style={styles.item_name}>Tarifs</Text>
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'facture' ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: screenName === 'facture' ? colors.white : colors.black, }]}>Facture</Text>
                         </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'facture' ? colors.white : colors.black} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.item_container} activeOpacity={0.5} onPress={() => navigation.navigate('partenaire')}>
+                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'recharge' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('recharge')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
-                            <Text style={styles.item_name}>Partenaires</Text>
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'recharge' ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: screenName === 'recharge' ? colors.white : colors.black, }]}>Recharge</Text>
                         </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'recharge' ? colors.white : colors.black} />
+                    </TouchableOpacity> */}
+
+                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'status' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('status')}>
+                        <View style={styles.item_icon_name_container} >
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'status' ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: screenName === 'status' ? colors.white : colors.black, }]}>Statut</Text>
+                        </View>
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'status' ? colors.white : colors.black} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.item_container} activeOpacity={0.5} onPress={() => navigation.navigate('a_propos')}>
+                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'tarif' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('tarif')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
-                            <Text style={styles.item_name}>A propos</Text>
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'tarif' ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: screenName === 'tarif' ? colors.white : colors.black, }]}>Tarifs</Text>
                         </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'tarif' ? colors.white : colors.black} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'partenaire' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('partenaire')}>
+                        <View style={styles.item_icon_name_container} >
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: screenName === 'partenaire' ? colors.white : colors.black, }]}>Partenaires</Text>
+                        </View>
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'a_propos' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('a_propos')}>
+                        <View style={styles.item_icon_name_container} >
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'a_propos' ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: screenName === 'a_propos' ? colors.white : colors.black, }]}>A propos</Text>
+                        </View>
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'a_propos' ? colors.white : colors.black} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{ ...styles.item_container, marginBottom: 10 }} activeOpacity={0.5} onPress={call}>
@@ -119,12 +145,12 @@ const styles = StyleSheet.create({
 
     container: { flex: 1, padding: 10, },
 
-    logo_container: { alignItems: 'center' },
+    logo_container: { alignItems: 'center', },
     logo: { height: width * 0.30, width: width * 0.30, resizeMode: 'contain', },
 
-    item_global_container: { height: height - (width * 0.30 + 90) },
+    item_global_container: { height: height * 0.66 },
 
-    item_container: { marginVertical: 5, padding: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', },
+    item_container: { marginVertical: 5, padding: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 5, },
     item_icon_name_container: { flexDirection: 'row', alignItems: 'center', },
     item_icon: {},
     item_name: { color: colors.black, marginLeft: 10, fontSize: 15, fontFamily: roboto.regular },

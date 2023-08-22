@@ -26,8 +26,8 @@ const PartenaireCard: FC<COMPONENT_TYPE> = ({ logo, name, description }) => {
             <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.bottom_sheet_container} animationType='slide'>
                 <View style={styles.bottom_sheet_header}>
                     <Text style={styles.detail}>Détails</Text>
-                    <TouchableOpacity activeOpacity={0.5} onPress={() => { setVisible(false) }}>
-                        <MaterialCommunityIcons name='close' color={colors.fond1} size={30} style={styles.close} />
+                    <TouchableOpacity activeOpacity={0.5} onPress={() => { setVisible(false) }} style={styles.close_container}>
+                        <MaterialCommunityIcons name='close' color={colors.white} size={30} style={styles.close} />
                     </TouchableOpacity>
                 </View>
 
@@ -56,9 +56,10 @@ const styles = StyleSheet.create({
 
     bottom_sheet_header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', },
     detail: { color: colors.black, fontFamily: roboto.black, },
+    close_container: { backgroundColor: colors.fond1, borderRadius: 30, },
     close: {},
 
-    divider: { height: 2, backgroundColor: colors.divider, },
+    divider: { height: 2, backgroundColor: colors.divider, marginTop: 5, },
 
     bottom_sheet_content_name: { color: colors.black, fontFamily: roboto.black, marginVertical: 5, textTransform: 'uppercase', },
     bottom_sheet_content_description: { color: colors.black, fontFamily: roboto.regular, textAlign: 'justify', },

@@ -28,14 +28,9 @@ const Recharge = () => {
                             <Image source={images.vitepay} style={styles.vitepay_logo} />
                         </View>
                         <TouchableOpacity activeOpacity={0.5} style={styles.close_container} onPress={() => { setVisible(false) }}>
-                            <MaterialCommunityIcons name='close' color={colors.fond1} size={30} style={styles.close} />
+                            <MaterialCommunityIcons name='close' color={colors.white} size={50} style={styles.close} />
                         </TouchableOpacity>
                     </View>
-
-                    {/* <View style={styles.vitepay_texte_container}>
-                        <Text style={styles.vitepay_title}>VITEPAY</Text>
-                        <Text style={styles.vitepay_description}>Achat chez vitepay</Text>
-                    </View> */}
 
                     <View style={styles.divider} />
 
@@ -48,7 +43,7 @@ const Recharge = () => {
 
                         <View style={styles.input_container}>
                             <Text style={styles.input_title}>Montant (FCFA)</Text>
-                            <TextInput keyboardType='numeric' style={styles.input} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'Numéro orange (sans l\'indicatif)'} value={phone} onChangeText={text => setPhone(text)} />
+                            <TextInput keyboardType='numeric' style={styles.input} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'Montant de la recharge'} value={phone} onChangeText={text => setPhone(text)} />
                             <Text style={styles.input_error}>Montant non conforme</Text>
                         </View>
 
@@ -70,12 +65,12 @@ const styles = StyleSheet.create({
     btn: { backgroundColor: colors.fond1, paddingVertical: 10, paddingHorizontal: 20, borderRadius: 10, },
     btn_name: { color: colors.white, fontFamily: roboto.black, textAlign: 'center', textTransform: 'uppercase', },
 
-    bottom_sheet_container: { borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 15, width: width, height: height * 0.53, position: 'absolute', bottom: 0, },
+    bottom_sheet_container: { borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 15, width: width, height: height * 0.59, position: 'absolute', bottom: 0, },
 
-    vitepay_logo_close_container: { position: 'relative', alignItems: 'center', marginTop: -(width * 0.45) / 2 },
-    vitepay_logo_container: { height: width * 0.45, width: width * 0.45, },
-    vitepay_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.45, },
-    close_container: { position: 'absolute', bottom: '25%', right: 0, },
+    vitepay_logo_close_container: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', },
+    vitepay_logo_container: { height: width * 0.35, width: width * 0.35, },
+    vitepay_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.35, },
+    close_container: { backgroundColor: colors.fond1, borderRadius: 50, },
     close: {},
 
     vitepay_texte_container: { alignItems: 'center', marginVertical: 10, },

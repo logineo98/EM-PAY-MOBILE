@@ -1,28 +1,19 @@
 import { StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Screens } from '../../../screens'
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ParamListBase, RouteProp, getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
-const HomeStack = ({ navigation, route }: any) => {
+type COMPONENT_TYPE = { route: RouteProp<ParamListBase, 'home_stack'>, setScreenName: React.Dispatch<React.SetStateAction<string>> }
+
+const HomeStack: FC<COMPONENT_TYPE> = ({ route, setScreenName }) => {
     const stack = createNativeStackNavigator()
-
-    const [screen, setScreen] = useState('')
 
     useEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route)
-        routeName && setScreen(routeName)
+
+        setScreenName(routeName as string)
     }, [route])
-
-    useEffect(() => {
-        (async () => {
-            try { await AsyncStorage.setItem('route_name', screen) }
-            catch (error: any) { }
-        })()
-    }, [screen])
-
-    console.log(screen)
 
     return (
         <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='home'>

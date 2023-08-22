@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { components } from '../../components'
 import { colors, roboto } from '../../libs/typography/typography'
 import QRCode from 'react-native-qrcode-svg'
-import { Camera, useCameraDevices, useFrameProcessor } from 'react-native-vision-camera'
+import { Camera, useCameraDevices } from 'react-native-vision-camera'
 // import { BarcodeFormat, scanBarcodes, useScanBarcodes } from 'vision-camera-code-scanner'
 
 const IkaWariTaa = () => {
@@ -22,8 +22,6 @@ const IkaWariTaa = () => {
             setHasPermission(status === 'authorized')
         })()
     }, [])
-
-    console.log(hasPermission)
 
     return (
         <components.commons.screen_container title='Ika Wari Taa'>

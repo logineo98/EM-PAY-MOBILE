@@ -6,7 +6,9 @@ import { ParamListBase } from '@react-navigation/native'
 import { images } from '../../../libs/constants/constants'
 import { Switch } from 'react-native-elements'
 
-const Header: FC<{ navigation: DrawerNavigationProp<ParamListBase, string, undefined> }> = ({ navigation }) => {
+type COMPONENT_TYPE = { navigation: DrawerNavigationProp<ParamListBase, string, undefined>, screenName: string }
+
+const Header: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => {
 
   const [checked, setChecked] = useState(false)
 
@@ -19,7 +21,7 @@ const Header: FC<{ navigation: DrawerNavigationProp<ParamListBase, string, undef
         <Text style={styles.profil_name}>Tz nation</Text>
       </TouchableOpacity>
 
-      <Switch value={checked} onValueChange={(value) => setChecked(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={checked ? colors.fond1 : '#f4f3f4'} />
+      {(!screenName || screenName === 'home') && <Switch value={checked} onValueChange={(value) => setChecked(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={checked ? colors.fond1 : '#f4f3f4'} />}
     </View>
   )
 }
