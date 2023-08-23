@@ -4,9 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Screens } from '../../../screens'
 import { ParamListBase, RouteProp, getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
-type COMPONENT_TYPE = { route: RouteProp<ParamListBase, 'home_stack'>, setScreenName: React.Dispatch<React.SetStateAction<string>> }
+type COMPONENT_TYPE = {
+    route: RouteProp<ParamListBase, 'home_stack'>,
+    setScreenName: React.Dispatch<React.SetStateAction<string>>,
+    displayCard: boolean,
+}
 
-const HomeStack: FC<COMPONENT_TYPE> = ({ route, setScreenName }) => {
+const HomeStack: FC<COMPONENT_TYPE> = ({ route, setScreenName, displayCard }) => {
     const stack = createNativeStackNavigator()
 
     useEffect(() => {
@@ -17,7 +21,7 @@ const HomeStack: FC<COMPONENT_TYPE> = ({ route, setScreenName }) => {
 
     return (
         <stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='home'>
-            <stack.Screen name='home' component={Screens.Home.home} />
+            <stack.Screen name='home' children={({ navigation }) => <Screens.Home.home navigation={navigation} displayCard={displayCard} />} />
             <stack.Screen name='ika_wari_taa' component={Screens.Home.ika_wari_taa} />
             <stack.Screen name='facture' component={Screens.Home.facture} />
             <stack.Screen name='recharge' component={Screens.Home.recharge} />

@@ -1,27 +1,14 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { components } from '../../components'
 import { colors, roboto } from '../../libs/typography/typography'
 import QRCode from 'react-native-qrcode-svg'
-import { Camera, useCameraDevices } from 'react-native-vision-camera'
-// import { BarcodeFormat, scanBarcodes, useScanBarcodes } from 'vision-camera-code-scanner'
+import QRCodeScanner from 'react-native-qrcode-scanner'
 
 const IkaWariTaa = () => {
 
     const [showQrCode, setShowQrCode] = useState(false)
-    const [hasPermission, setHasPermission] = useState(false)
-
-    const devices = useCameraDevices()
-    const device = devices.back
-
-    // const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], { checkInverted: true })
-
-    useEffect(() => {
-        (async () => {
-            const status = await Camera.requestCameraPermission()
-            setHasPermission(status === 'authorized')
-        })()
-    }, [])
+    const [scanQrCode, setScanQrCode] = useState(false)
 
     return (
         <components.commons.screen_container title='Ika Wari Taa'>
@@ -36,28 +23,27 @@ const IkaWariTaa = () => {
                     <View style={styles.qr_code}>
                         {showQrCode && <QRCode value='Tz Nation 13' size={150} />}
 
-                        {device != null && hasPermission && !showQrCode && (
-                            <>
-                                <Camera
-                                    style={StyleSheet.absoluteFill}
-                                    device={device}
-                                    isActive={true}
-                                    // frameProcessor={frameProcessor}
-                                    frameProcessorFps={5}
-                                />
-                            </>
-                        )}
+                        {scanQrCode &&
+                            <QRCodeScanner
+                                onRead={({ data }) => Alert.alert('Test', data)}
+                                reactivate={true}
+                                reactivateTimeout={1500}
+                                cameraType='back'
+                            />
+                        }
+
+                        {(!scanQrCode && !showQrCode) && <Text style={styles.qr_texte}>Scanner ou afficher QR CODE</Text>}
                     </View>
                 </View>
 
                 <Text style={styles.treatment_message}>Retrait de (MONTANT) est en cours de Traitement.</Text>
 
                 <View style={styles.btn_qr_code_container}>
-                    <TouchableOpacity style={styles.btn_qr_code} activeOpacity={0.5} onPress={() => setShowQrCode(prev => !prev)}>
+                    <TouchableOpacity style={styles.btn_qr_code} activeOpacity={0.5} onPress={() => { setShowQrCode(true); setScanQrCode(false); }}>
                         <Text style={styles.btn_qr_code_text}> {!showQrCode ? 'Montrer QR Code' : 'Masquer QR Code'} </Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.btn_qr_code} activeOpacity={0.5}>
+                    <TouchableOpacity style={styles.btn_qr_code} activeOpacity={0.5} onPress={() => { setShowQrCode(false); setScanQrCode(true); }}>
                         <Text style={styles.btn_qr_code_text}>Scanner QR Code</Text>
                     </TouchableOpacity>
                 </View>
@@ -74,7 +60,7 @@ const styles = StyleSheet.create({
 
     qr_code_container: { marginVertical: 30, },
     qr_texte: { color: colors.black, fontFamily: roboto.regular, textTransform: 'uppercase', },
-    qr_code: { height: 200, borderWidth: 1, borderRadius: 5, alignItems: 'center', justifyContent: 'center', },
+    qr_code: { height: 200, overflow: 'hidden', borderWidth: 1, borderRadius: 5, alignItems: 'center', justifyContent: 'center', },
 
     treatment_message: { color: colors.black, fontFamily: roboto.regular, },
 

@@ -6,11 +6,14 @@ import { ParamListBase } from '@react-navigation/native'
 import { images } from '../../../libs/constants/constants'
 import { Switch } from 'react-native-elements'
 
-type COMPONENT_TYPE = { navigation: DrawerNavigationProp<ParamListBase, string, undefined>, screenName: string }
+type COMPONENT_TYPE = {
+  navigation: DrawerNavigationProp<ParamListBase, string, undefined>,
+  screenName: string,
+  displayCard: boolean,
+  setDisplayCard: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const Header: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => {
-
-  const [checked, setChecked] = useState(false)
+const Header: FC<COMPONENT_TYPE> = ({ navigation, screenName, displayCard, setDisplayCard }) => {
 
   return (
     <View style={styles.header_container}>
@@ -21,7 +24,7 @@ const Header: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => {
         <Text style={styles.profil_name}>Tz nation</Text>
       </TouchableOpacity>
 
-      {(!screenName || screenName === 'home') && <Switch value={checked} onValueChange={(value) => setChecked(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={checked ? colors.fond1 : '#f4f3f4'} />}
+      {(!screenName || screenName === 'home') && <Switch value={displayCard} onValueChange={(value) => setDisplayCard(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={displayCard ? colors.fond1 : '#f4f3f4'} />}
     </View>
   )
 }

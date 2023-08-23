@@ -1,5 +1,5 @@
 import { FlatList, Image, ImageProps, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { images } from '../../libs/constants/constants'
 import { colors, roboto, width } from '../../libs/typography/typography'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -13,7 +13,14 @@ const Item = (item: { logo: ImageProps, name: string, description: string }) => 
     </View>
 )
 
-const Home: FC<{ navigation: StackNavigationHelpers, }> = ({ navigation }) => {
+type COMPONENT_TYPE = {
+    navigation: StackNavigationHelpers,
+    displayCard: boolean,
+}
+
+const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
+
+    const [displayCardVerso, setDisplayCardVerso] = useState(false)
 
     const partenaires = [
         { id: '1', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
@@ -31,10 +38,14 @@ const Home: FC<{ navigation: StackNavigationHelpers, }> = ({ navigation }) => {
     return (
         <components.commons.screen_container>
             <ScrollView showsHorizontalScrollIndicator={false}>
-                <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container}>
-                    <View style={styles.virtual_card_container}>
-                        <Image source={images.virtal_card} style={styles.virtual_card} />
-                    </View>
+                <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container} onPress={() => setDisplayCardVerso(prev => !prev)}>
+                    {displayCard &&
+                        <View style={styles.virtual_card_container}>
+                            {!displayCardVerso ?
+                                <Image source={images.virtal_card} style={styles.virtual_card} /> :
+                                <Image source={images.passport} style={styles.virtual_card} />
+                            }
+                        </View>}
                 </TouchableOpacity>
 
                 <View style={styles.solde_container}>
