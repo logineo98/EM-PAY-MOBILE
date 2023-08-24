@@ -1,20 +1,29 @@
 import { StyleSheet, Text, } from 'react-native'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import GeolocalisationStack from '../stacks/geolocalisation_stack'
-import HistoriqueStack from '../stacks/historique_stack'
-import ServiceClientStack from '../stacks/client_service_stack'
-import HomeStack from '../stacks/home_stack'
+import GeolocalisationStack from './geolocalisation_stack'
+import HistoriqueStack from './historique_stack'
+import ServiceClientStack from './client_service_stack'
+import HomeStack from './home_stack'
 import { colors, roboto } from '../../typography/typography'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { ParamListBase, RouteProp, getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
 type COMPONENT_TYPE = {
     setScreenName: React.Dispatch<React.SetStateAction<string>>,
+    setBottomTabScreenName: React.Dispatch<React.SetStateAction<string>>,
     displayCard: boolean,
+    route: RouteProp<ParamListBase, 'bottom'>,
 }
 
-const BottomNavigation: FC<COMPONENT_TYPE> = ({ setScreenName, displayCard }) => {
+const BottomNavigation: FC<COMPONENT_TYPE> = ({ setScreenName, setBottomTabScreenName, displayCard, route }) => {
     const BottomTab = createBottomTabNavigator()
+
+    useEffect(() => {
+        const routeName = getFocusedRouteNameFromRoute(route)
+
+        setBottomTabScreenName(routeName as string)
+    }, [route])
 
     return (
         <BottomTab.Navigator screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }} initialRouteName='home_stack'>

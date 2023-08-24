@@ -53,30 +53,6 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={(!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge') ? colors.white : colors.black} />
                     </TouchableOpacity>
 
-                    {/* <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'ika_wari_taa' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('ika_wari_taa')}>
-                        <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'ika_wari_taa' ? colors.white : colors.black} />
-                            <Text style={[styles.item_name, { color: screenName === 'ika_wari_taa' ? colors.white : colors.black, }]}>Ika Wari Taa</Text>
-                        </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'ika_wari_taa' ? colors.white : colors.black} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'facture' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('facture')}>
-                        <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'facture' ? colors.white : colors.black} />
-                            <Text style={[styles.item_name, { color: screenName === 'facture' ? colors.white : colors.black, }]}>Facture</Text>
-                        </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'facture' ? colors.white : colors.black} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'recharge' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('recharge')}>
-                        <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'recharge' ? colors.white : colors.black} />
-                            <Text style={[styles.item_name, { color: screenName === 'recharge' ? colors.white : colors.black, }]}>Recharge</Text>
-                        </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'recharge' ? colors.white : colors.black} />
-                    </TouchableOpacity> */}
-
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'status' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('status')}>
                         <View style={styles.item_icon_name_container} >
                             <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'status' ? colors.white : colors.black} />
@@ -88,7 +64,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'tarif' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('tarif')}>
                         <View style={styles.item_icon_name_container} >
                             <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'tarif' ? colors.white : colors.black} />
-                            <Text style={[styles.item_name, { color: screenName === 'tarif' ? colors.white : colors.black, }]}>Tarifs</Text>
+                            <Text style={[styles.item_name, { color: screenName === 'tarif' ? colors.white : colors.black, }]}>Tarif</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'tarif' ? colors.white : colors.black} />
                     </TouchableOpacity>
@@ -96,7 +72,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'partenaire' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('partenaire')}>
                         <View style={styles.item_icon_name_container} >
                             <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
-                            <Text style={[styles.item_name, { color: screenName === 'partenaire' ? colors.white : colors.black, }]}>Partenaires</Text>
+                            <Text style={[styles.item_name, { color: screenName === 'partenaire' ? colors.white : colors.black, }]}>Partenaire</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
                     </TouchableOpacity>
@@ -120,7 +96,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
                     <TouchableOpacity style={styles.item_container} activeOpacity={0.5} onPress={onShare}>
                         <View style={styles.item_icon_name_container} >
                             <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
-                            <Text style={styles.item_name}>Parrainages</Text>
+                            <Text style={styles.item_name}>Parrainage</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
                     </TouchableOpacity>

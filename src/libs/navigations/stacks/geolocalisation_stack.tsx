@@ -1,5 +1,6 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { Screens } from "../../../screens"
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Screens } from '../../../screens'
+import { StyleSheet } from 'react-native'
 
 const GeolocalisationStack = () => {
     const stack = createNativeStackNavigator()
@@ -10,5 +11,7 @@ const GeolocalisationStack = () => {
         </stack.Navigator>
     )
 }
+
+const styles = StyleSheet.create({})
 
 export default GeolocalisationStack
