@@ -11,12 +11,15 @@ const RootNavigation = () => {
 
     return (
         <NavigationContainer >
-            <root.Navigator screenOptions={{ headerShown: false }}>
-                {host ?
+            <root.Navigator screenOptions={{ headerShown: false }} initialRouteName='auth'>
+                {/* {host ?
                     <root.Screen name='main' component={Navigation} />
                     :
                     <root.Screen name='auth' component={AuthStack} />
-                }
+                } */}
+
+                <root.Screen name='main' component={Navigation} />
+                <root.Screen name='auth' component={AuthStack} />
             </root.Navigator>
         </NavigationContainer>
     )

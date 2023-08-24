@@ -57,10 +57,12 @@ const ConnexionPages: FC<proprs> = ({ index, currentPage, states, prev, next }: 
 
     //---------------------SERVICES FUNCTIONS-----------------------//
     const handleLogin = () => {
-        const { login_phone_error, login_password_error } = connexion_request(connexionInputs)
-        if (login_phone_error !== '' || login_password_error !== '') { setError(connexion_request(connexionInputs)); return }
-        else setError(error_init)
+        // const { login_phone_error, login_password_error } = connexion_request(connexionInputs)
+        // if (login_phone_error !== '' || login_password_error !== '') { setError(connexion_request(connexionInputs)); return }
+        // else setError(error_init)
 
+        navigation.navigate('main')
+        logger("Reset password succeed", "GOTO HOME")
     }
 
     const handleForgot = () => {
@@ -82,7 +84,6 @@ const ConnexionPages: FC<proprs> = ({ index, currentPage, states, prev, next }: 
         if (reset_password_error !== '' || reset_confirm_error !== '') { setError(reset_request(resetInputs)); return }
         else setError(error_init)
 
-        logger("Reset password succeed", "GOTO HOME")
     }
     //--------------------------------------------------------------//
 

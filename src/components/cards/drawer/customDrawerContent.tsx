@@ -6,6 +6,8 @@ import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 type COMPONENT_TYPE = { navigation: DrawerNavigationHelpers, screenName: string }
 
@@ -55,7 +57,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'status' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('status')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'status' ? colors.white : colors.black} />
+                            <MaterialCommunityIcons name='map-marker-radius' style={styles.item_icon} size={25} color={screenName === 'status' ? colors.white : colors.black} />
                             <Text style={[styles.item_name, { color: screenName === 'status' ? colors.white : colors.black, }]}>Statut</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'status' ? colors.white : colors.black} />
@@ -63,7 +65,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'tarif' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('tarif')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'tarif' ? colors.white : colors.black} />
+                            <FontAwesome5 name='money-check-alt' style={styles.item_icon} size={25} color={screenName === 'tarif' ? colors.white : colors.black} />
                             <Text style={[styles.item_name, { color: screenName === 'tarif' ? colors.white : colors.black, }]}>Tarif</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'tarif' ? colors.white : colors.black} />
@@ -71,7 +73,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'partenaire' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('partenaire')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
+                            <FontAwesome name='users' style={styles.item_icon} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
                             <Text style={[styles.item_name, { color: screenName === 'partenaire' ? colors.white : colors.black, }]}>Partenaire</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
@@ -79,7 +81,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'a_propos' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('a_propos')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={screenName === 'a_propos' ? colors.white : colors.black} />
+                            <FontAwesome name='info-circle' style={styles.item_icon} size={25} color={screenName === 'a_propos' ? colors.white : colors.black} />
                             <Text style={[styles.item_name, { color: screenName === 'a_propos' ? colors.white : colors.black, }]}>A propos</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={screenName === 'a_propos' ? colors.white : colors.black} />
@@ -87,7 +89,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
 
                     <TouchableOpacity style={{ ...styles.item_container, marginBottom: 10 }} activeOpacity={0.5} onPress={call}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
+                            <AntDesign name='customerservice' style={styles.item_icon} size={25} color={colors.black} />
                             <Text style={styles.item_name}>Service client</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
@@ -95,7 +97,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
 
                     <TouchableOpacity style={styles.item_container} activeOpacity={0.5} onPress={onShare}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={colors.black} />
+                            <FontAwesome name='users' style={styles.item_icon} size={25} color={colors.black} />
                             <Text style={styles.item_name}>Parrainage</Text>
                         </View>
                         <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={colors.black} />
