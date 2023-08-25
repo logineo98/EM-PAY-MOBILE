@@ -1,9 +1,7 @@
 import Connexion from "./auth/connexion";
 import Inscription from "./auth/inscription";
 import Welcome from "./auth/welcome";
-import Geolocalisation from "./bottom_nav_screens/geolocalisation";
-import Historique from "./bottom_nav_screens/historique";
-import ServiceClient from "./bottom_nav_screens/service_client";
+import Geolocalisation from "./home/geolocalisation";
 import APropos from "./home/a_propos";
 import Facture from "./home/facture";
 import Home from "./home/home";
@@ -12,13 +10,10 @@ import Partenaires from "./home/partenaire";
 import Recharge from "./home/recharge";
 import Status from "./home/status";
 import Tarif from "./home/tarif";
+import Historique from "./home/historique";
+import ServiceClient from "./home/service_client";
 
 export const Screens = {
-    geolocalisation: Geolocalisation,
-    historique: Historique,
-    serviceClient: ServiceClient,
-
-    Others: {},
     Auth: {
         welcome: Welcome,
         login: Connexion,
@@ -33,6 +28,9 @@ export const Screens = {
         tarif: Tarif,
         partenaire: Partenaires,
         status: Status,
+        geolocalisation: Geolocalisation,
+        historique: Historique,
+        serviceClient: ServiceClient,
     }
 
 }

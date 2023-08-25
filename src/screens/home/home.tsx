@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { StackNavigationHelpers } from '@react-navigation/stack/lib/typescript/src/types'
 import { components } from '../../components'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 const Item = (item: { logo: ImageProps, name: string, description: string }) => (
     <View style={styles.partenaire_logo_container}>
@@ -21,6 +22,7 @@ type COMPONENT_TYPE = {
 const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
 
     const [displayCardVerso, setDisplayCardVerso] = useState(false)
+    const [show, setShow] = useState(false)
 
     const partenaires = [
         { id: '1', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
@@ -36,7 +38,7 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
     ]
 
     return (
-        <components.commons.screen_container style={{ backgroundColor: 'red', paddingBottom: 60, }}>
+        <components.commons.screen_container style={{ paddingBottom: !show ? 50 : 100, }}>
             <>
                 <ScrollView showsHorizontalScrollIndicator={false}>
                     <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container} onPress={() => setDisplayCardVerso(prev => !prev)}>
@@ -110,20 +112,31 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
                             showsHorizontalScrollIndicator={false}
                         />
                     </View>
-
-                    <View style={styles.partenaire_container}>
-                        <FlatList
-                            data={partenaires}
-                            renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
-                            keyExtractor={item => item.id}
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                        />
-                    </View>
                 </ScrollView>
 
-                <View style={styles.bottom_tab_container}>
-                    <Text>fsdfsd</Text>
+                <View style={styles.bottom_tab_global_container}>
+                    <TouchableOpacity activeOpacity={0.5} style={styles.plus_minus_icon_container} onPress={() => setShow(!show)}>
+                        <Entypo name={!show ? 'plus' : 'minus'} size={25} color={colors.white} />
+                    </TouchableOpacity>
+
+                    {show &&
+                        <View style={styles.bottom_tab_container}>
+                            <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('geolocalisation')}>
+                                <MaterialCommunityIcons name='map-marker-radius-outline' size={25} color={colors.black} />
+                                <Text style={{ color: colors.black, fontSize: 8 }}>Carte géolocalisation</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('historique')}>
+                                <MaterialCommunityIcons name='history' size={25} color={colors.black} />
+                                <Text style={{ color: colors.black, fontSize: 8 }}>Historique</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('service_client')}>
+                                <MaterialCommunityIcons name='phone-outgoing' size={25} color={colors.black} />
+                                <Text style={{ color: colors.black, fontSize: 8 }}>Service client</Text>
+                            </TouchableOpacity>
+                        </View>
+                    }
                 </View>
             </>
         </components.commons.screen_container>
@@ -131,7 +144,7 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
 }
 
 const styles = StyleSheet.create({
-    home_container: { flex: 1, padding: 10 },
+    home_container: { flex: 1, padding: 10, },
 
     virtual_card_global_container: { alignItems: 'center' },
     virtual_card_container: { height: 200, width: width * 0.85, borderWidth: 1, borderColor: colors.fond1, borderRadius: 5, padding: 2 },
@@ -155,11 +168,14 @@ const styles = StyleSheet.create({
     historique_separator: { height: 1, width: '35%', color: colors.black, borderWidth: 1, borderStyle: 'dashed' },
     historique_price: { width: '30%', color: colors.black, fontFamily: roboto.regular, },
 
-    partenaire_container: { justifyContent: 'center', marginBottom: 10 },
+    partenaire_container: { justifyContent: 'center', marginBottom: 10, },
     partenaire_logo_container: { alignItems: 'center', justifyContent: 'center', height: width * 0.17, width: width * 0.17, borderRadius: width * 0.17, marginRight: 2, borderWidth: 1, borderColor: colors.fond1, },
     partenaire_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.17 },
 
-    bottom_tab_container: { backgroundColor: 'blue', height: 50, width: '100%', position: 'absolute', bottom: 0, },
+    bottom_tab_global_container: { width: width, paddingVertical: 5, position: 'absolute', bottom: 0, alignItems: 'center', justifyContent: 'center', },
+    plus_minus_icon_container: { backgroundColor: colors.tz_blue, height: 40, width: 40, borderRadius: 40, alignItems: 'center', justifyContent: 'center', },
+    bottom_tab_container: { backgroundColor: colors.white, width: '95%', flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 5, borderRadius: 10, },
+    bottom_tab: { alignItems: 'center', justifyContent: 'center', },
 
 })
 

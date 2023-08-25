@@ -9,12 +9,11 @@ import { Switch } from 'react-native-elements'
 type COMPONENT_TYPE = {
   navigation: DrawerNavigationProp<ParamListBase, string, undefined>,
   screenName: string,
-  bottomTabScreenName: string,
   displayCard: boolean,
   setDisplayCard: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Header: FC<COMPONENT_TYPE> = ({ navigation, screenName, bottomTabScreenName, displayCard, setDisplayCard }) => {
+const Header: FC<COMPONENT_TYPE> = ({ navigation, screenName, displayCard, setDisplayCard }) => {
 
   return (
     <View style={styles.header_container}>
@@ -25,7 +24,7 @@ const Header: FC<COMPONENT_TYPE> = ({ navigation, screenName, bottomTabScreenNam
         <Text style={styles.profil_name}>Tz nation</Text>
       </TouchableOpacity>
 
-      {((!screenName || screenName === 'home') && (bottomTabScreenName !== 'geolocalisation_stack' && bottomTabScreenName !== 'historique_stack' && bottomTabScreenName !== 'service_client_stack')) &&
+      {(!screenName || screenName === 'home') &&
         <Switch value={displayCard} onValueChange={(value) => setDisplayCard(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={displayCard ? colors.fond1 : '#f4f3f4'} />
       }
     </View>

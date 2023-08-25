@@ -18,7 +18,7 @@ const RootNavigation = () => {
                     <root.Screen name='auth' component={AuthStack} />
                 } */}
 
-                <root.Screen name='main' component={Navigation} />
+                <root.Screen name='main' children={({ route }) => <Navigation route={route} />} />
                 <root.Screen name='auth' component={AuthStack} />
             </root.Navigator>
         </NavigationContainer>

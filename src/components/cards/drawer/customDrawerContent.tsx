@@ -47,12 +47,12 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
 
             <View style={styles.item_global_container}>
                 <ScrollView contentContainerStyle={{}}>
-                    <TouchableOpacity style={[styles.item_container, { marginTop: 10, backgroundColor: (!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge') ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('home')}>
+                    <TouchableOpacity style={[styles.item_container, { marginTop: 10, backgroundColor: (!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge' || screenName === 'geolocalisation' || screenName === 'historique' || screenName === 'service_client') ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('home')}>
                         <View style={styles.item_icon_name_container} >
-                            <FontAwesome name='home' style={styles.item_icon} size={25} color={(!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge') ? colors.white : colors.black} />
-                            <Text style={[styles.item_name, { color: (!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge') ? colors.white : colors.black, }]}>Acceuil</Text>
+                            <FontAwesome name='home' style={styles.item_icon} size={25} color={(!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge' || screenName === 'geolocalisation' || screenName === 'historique' || screenName === 'service_client') ? colors.white : colors.black} />
+                            <Text style={[styles.item_name, { color: (!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge' || screenName === 'geolocalisation' || screenName === 'historique' || screenName === 'service_client') ? colors.white : colors.black, }]}>Acceuil</Text>
                         </View>
-                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={(!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge') ? colors.white : colors.black} />
+                        <MaterialIcons name='arrow-right' style={styles.item_fleche} size={25} color={(!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge' || screenName === 'geolocalisation' || screenName === 'historique' || screenName === 'service_client') ? colors.white : colors.black} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'status' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('status')}>
