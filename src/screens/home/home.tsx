@@ -36,80 +36,96 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
     ]
 
     return (
-        <components.commons.screen_container>
-            <ScrollView showsHorizontalScrollIndicator={false}>
-                <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container} onPress={() => setDisplayCardVerso(prev => !prev)}>
-                    {displayCard &&
-                        <View style={styles.virtual_card_container}>
-                            {!displayCardVerso ?
-                                <Image source={images.virtal_card} style={styles.virtual_card} /> :
-                                <Image source={images.passport} style={styles.virtual_card} />
-                            }
-                        </View>}
-                </TouchableOpacity>
-
-                <View style={styles.solde_container}>
-                    <Text style={styles.solde_name}>Mon solde : </Text>
-                    <Text style={styles.solde_price}> 100 000 FCFA </Text>
-                </View>
-
-                <View style={styles.menu_home_container}>
-                    <TouchableOpacity activeOpacity={0.5} style={styles.menu_home} onPress={() => navigation.navigate('ika_wari_taa')}>
-                        <View style={styles.menu_icon_container}>
-                            <MaterialCommunityIcons name='bank-minus' color={'#000'} size={30} style={styles.menu_icon} />
-                        </View>
-                        <Text style={styles.menu_name}>Ika Wari Taa</Text>
+        <components.commons.screen_container style={{ backgroundColor: 'red', paddingBottom: 60, }}>
+            <>
+                <ScrollView showsHorizontalScrollIndicator={false}>
+                    <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container} onPress={() => setDisplayCardVerso(prev => !prev)}>
+                        {displayCard &&
+                            <View style={styles.virtual_card_container}>
+                                {!displayCardVerso ?
+                                    <Image source={images.virtal_card} style={styles.virtual_card} /> :
+                                    <Image source={images.passport} style={styles.virtual_card} />
+                                }
+                            </View>}
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={0.5} style={styles.menu_home}>
-                        <View style={styles.menu_icon_container}>
-                            <FontAwesome5 name='file-invoice' color={'#000'} size={30} style={styles.menu_icon} onPress={() => navigation.navigate('facture')} />
-                        </View>
-                        <Text style={styles.menu_name}>Facture</Text>
-                    </TouchableOpacity>
+                    <View style={styles.solde_container}>
+                        <Text style={styles.solde_name}>Mon solde : </Text>
+                        <Text style={styles.solde_price}> 100 000 FCFA </Text>
+                    </View>
 
-                    <TouchableOpacity activeOpacity={0.5} style={styles.menu_home}>
-                        <View style={styles.menu_icon_container}>
-                            <MaterialCommunityIcons name='bank-plus' color={'#000'} size={30} style={styles.menu_icon} onPress={() => navigation.navigate('recharge')} />
-                        </View>
-                        <Text style={styles.menu_name}>Recharge</Text>
-                    </TouchableOpacity>
-                </View>
+                    <View style={styles.menu_home_container}>
+                        <TouchableOpacity activeOpacity={0.5} style={styles.menu_home} onPress={() => navigation.navigate('ika_wari_taa')}>
+                            <View style={styles.menu_icon_container}>
+                                <MaterialCommunityIcons name='bank-minus' color={'#000'} size={30} style={styles.menu_icon} />
+                            </View>
+                            <Text style={styles.menu_name}>Ika Wari Taa</Text>
+                        </TouchableOpacity>
 
-                <View style={styles.historique_container}>
-                    <Text style={styles.historique_title}>Historique des dépenses</Text>
+                        <TouchableOpacity activeOpacity={0.5} style={styles.menu_home}>
+                            <View style={styles.menu_icon_container}>
+                                <FontAwesome5 name='file-invoice' color={'#000'} size={30} style={styles.menu_icon} onPress={() => navigation.navigate('facture')} />
+                            </View>
+                            <Text style={styles.menu_name}>Facture</Text>
+                        </TouchableOpacity>
 
-                    <View style={styles.historique_content_container}>
-                        <View style={styles.historique_content}>
-                            <Text style={styles.historique_name}>Ika Wari Taa</Text>
-                            <View style={styles.historique_separator} />
-                            <Text style={styles.historique_price}>2 000 FCFA</Text>
-                        </View>
+                        <TouchableOpacity activeOpacity={0.5} style={styles.menu_home}>
+                            <View style={styles.menu_icon_container}>
+                                <MaterialCommunityIcons name='bank-plus' color={'#000'} size={30} style={styles.menu_icon} onPress={() => navigation.navigate('recharge')} />
+                            </View>
+                            <Text style={styles.menu_name}>Recharge</Text>
+                        </TouchableOpacity>
+                    </View>
 
-                        <View style={styles.historique_content}>
-                            <Text style={styles.historique_name}>Facture</Text>
-                            <View style={styles.historique_separator} />
-                            <Text style={styles.historique_price}>2 000 FCFA</Text>
-                        </View>
+                    <View style={styles.historique_container}>
+                        <Text style={styles.historique_title}>Historique des dépenses</Text>
 
-                        <View style={styles.historique_content}>
-                            <Text style={styles.historique_name}>Recharge</Text>
-                            <View style={styles.historique_separator} />
-                            <Text style={styles.historique_price}>2 000 FCFA</Text>
+                        <View style={styles.historique_content_container}>
+                            <View style={styles.historique_content}>
+                                <Text style={styles.historique_name}>Ika Wari Taa</Text>
+                                <View style={styles.historique_separator} />
+                                <Text style={styles.historique_price}>2 000 FCFA</Text>
+                            </View>
+
+                            <View style={styles.historique_content}>
+                                <Text style={styles.historique_name}>Facture</Text>
+                                <View style={styles.historique_separator} />
+                                <Text style={styles.historique_price}>2 000 FCFA</Text>
+                            </View>
+
+                            <View style={styles.historique_content}>
+                                <Text style={styles.historique_name}>Recharge</Text>
+                                <View style={styles.historique_separator} />
+                                <Text style={styles.historique_price}>2 000 FCFA</Text>
+                            </View>
                         </View>
                     </View>
-                </View>
 
-                <View style={styles.partenaire_container}>
-                    <FlatList
-                        data={partenaires}
-                        renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
-                        keyExtractor={item => item.id}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                    />
+                    <View style={styles.partenaire_container}>
+                        <FlatList
+                            data={partenaires}
+                            renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
+                            keyExtractor={item => item.id}
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                        />
+                    </View>
+
+                    <View style={styles.partenaire_container}>
+                        <FlatList
+                            data={partenaires}
+                            renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
+                            keyExtractor={item => item.id}
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                        />
+                    </View>
+                </ScrollView>
+
+                <View style={styles.bottom_tab_container}>
+                    <Text>fsdfsd</Text>
                 </View>
-            </ScrollView>
+            </>
         </components.commons.screen_container>
     )
 }
@@ -143,6 +159,7 @@ const styles = StyleSheet.create({
     partenaire_logo_container: { alignItems: 'center', justifyContent: 'center', height: width * 0.17, width: width * 0.17, borderRadius: width * 0.17, marginRight: 2, borderWidth: 1, borderColor: colors.fond1, },
     partenaire_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.17 },
 
+    bottom_tab_container: { backgroundColor: 'blue', height: 50, width: '100%', position: 'absolute', bottom: 0, },
 
 })
 

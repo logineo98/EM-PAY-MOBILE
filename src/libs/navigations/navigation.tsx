@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import BottomNavigation from './stacks/bottom_navigation'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { components } from '../../components'
+import { Screens } from '../../screens'
 
 const Navigation = () => {
     const Drawer = createDrawerNavigator()
@@ -19,7 +20,15 @@ const Navigation = () => {
                 swipeEnabled: false
             }}
         >
-            <Drawer.Screen name='bottom' children={({ route }) => <BottomNavigation route={route} setScreenName={setScreenName} setBottomTabScreenName={setBottomTabScreenName} displayCard={displayCard} />} />
+            <Drawer.Screen name='home' children={({ navigation }) => <Screens.Home.home navigation={navigation} displayCard={displayCard} />} />
+            <Drawer.Screen name='ika_wari_taa' component={Screens.Home.ika_wari_taa} />
+            <Drawer.Screen name='facture' component={Screens.Home.facture} />
+            <Drawer.Screen name='recharge' component={Screens.Home.recharge} />
+            <Drawer.Screen name='partenaire' component={Screens.Home.partenaire} />
+            <Drawer.Screen name='a_propos' component={Screens.Home.a_propos} />
+            <Drawer.Screen name='tarif' component={Screens.Home.tarif} />
+            <Drawer.Screen name='status' component={Screens.Home.status} />
+            {/* <Drawer.Screen name='bottom' children={({ route }) => <BottomNavigation route={route} setScreenName={setScreenName} setBottomTabScreenName={setBottomTabScreenName} displayCard={displayCard} />} /> */}
         </Drawer.Navigator>
     )
 }
