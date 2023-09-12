@@ -37,7 +37,7 @@ const Connexion: FC<props> = () => {
     return (
         <ScrollView ref={scrollViewRef} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
             <FlatList
-                style={{ height: hp(100) }}
+                style={{ height: hp('100%') }}
                 ref={flatListRef}
                 horizontal
                 showsHorizontalScrollIndicator={false}

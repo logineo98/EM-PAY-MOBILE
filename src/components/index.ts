@@ -3,6 +3,7 @@ import FactureCard from "./cards/facture/facture_card";
 import PartenaireCard from "./cards/partenaire/partenaire_card";
 import TarifCard from "./cards/tarif/tarif_card";
 import Container from "./commons/container";
+import CustomLoader from "./commons/custom_loading";
 import CustomRadioButton from "./commons/custom_radio_button";
 import Header from "./commons/header/header";
 import ScreenContainer from "./commons/tz/screen_container";
@@ -12,6 +13,7 @@ export const components = {
     commons: {
         header: Header,
         screen_container: ScreenContainer,
+        loading: CustomLoader,
         container: Container,
         radio: CustomRadioButton,
     },

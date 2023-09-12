@@ -12,10 +12,10 @@ import { useNavigation } from '@react-navigation/native'
 import { userModel } from '../../../libs/services/user/user.model'
 
 const goto = { reset_password: 'reset_password' }
-type props = { index?: number, verifyInputs: string, setVerifyInputs: any, error: { verify_phone_error?: string } }
+type props = { index?: number, verifyInputs: string, setVerifyInputs: any, error: { verify_phone_error?: string }, debugCode: string, setDebugcode: any }
 
 
-const VerificationPasswordOublier: FC<props> = ({ index, verifyInputs, setVerifyInputs, error }) => {
+const VerificationPasswordOublier: FC<props> = ({ index, verifyInputs, setVerifyInputs, error, debugCode, setDebugcode }) => {
 
     const CELL_COUNT = 5;
     const [value, setValue] = useState('');
@@ -24,7 +24,6 @@ const VerificationPasswordOublier: FC<props> = ({ index, verifyInputs, setVerify
 
 
     useEffect(() => { setVerifyInputs(value) }, [value]);
-
 
 
     return (
@@ -62,6 +61,11 @@ const VerificationPasswordOublier: FC<props> = ({ index, verifyInputs, setVerify
                     <Text style={css.auth.connexion.errortext}>{error?.verify_phone_error}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}><Text style={{ color: colors.black, fontFamily: roboto.light }}>{verify_screen.no_code} </Text><TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}><Text style={{ color: colors.fond1 }}>{verify_screen.retry}</Text></TouchableOpacity></View>
+
+                {debugCode && <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: "brown", padding: 5 }}>
+                    <Text style={{ color: "wheat" }}>Debug code: <Text style={{ color: "white" }}>{debugCode}</Text></Text>
+                </View>}
+
             </View>
         </components.commons.container>
     )

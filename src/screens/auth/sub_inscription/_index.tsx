@@ -15,6 +15,11 @@ import { useNavigation } from '@react-navigation/native'
 import { css } from '../../../libs/styles/styles'
 import { inscription_inputs_request } from '../../../libs/services/user/user.request'
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSpring } from 'react-native-reanimated'
+import { inscription_service, test_image } from '../../../libs/services/user/user.action'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../libs/services/store'
+import Toast from 'react-native-toast-message'
+import { components } from '../../../components'
 
 
 type proprs = { index: number, currentPage: number, prev: any, next: any, states: any }
@@ -26,13 +31,33 @@ const InscriptionPages: FC<proprs> = ({ index, currentPage, prev, next, states }
     const [error, setError] = useState<any>(error_init);
     const { inputs, setInputs } = states
     const [status, setStatus] = useState(false);
+    const [indicatif, setIndicatif] = useState<any>("+223");
+    const dispatch = useDispatch<any>()
+    const [click, setClick] = useState(false);
     let scale = useSharedValue(1);
 
+
+
+    const { tmp, user, user_errors, user_loading } = useSelector((state: RootState) => state?.user)
+
+    //---------------- user errors alert
+    useEffect(() => {
+        if (user_errors && user_errors !== null) { Toast.show({ type: 'error', text1: 'Erreurs', text2: (user_errors ? user_errors : ''), }); setClick(false); dispatch({ type: 'reset_user_errors' }); }
+    }, [user_errors, dispatch]);
+
+    //-------------- forgot success
+    useEffect(() => {
+        if (tmp && user !== null) {
+            next()
+            dispatch({ type: "reset_tmp" })
+        }
+    }, [tmp]);
+
+
+    //--------- setup animations
     useEffect(() => { setStatus(true); scale.value = withSpring(1); }, [inputs, currentPage]);
 
     useEffect(() => {
-
-
         switch (currentPage) {
             case 0:
                 scale.value = withSpring(1);
@@ -48,7 +73,7 @@ const InscriptionPages: FC<proprs> = ({ index, currentPage, prev, next, states }
                 break;
             case 2:
                 scale.value = withSpring(1);
-                if (inputs.document?.cin !== '' || inputs.document?.nina !== "" || inputs.document?.passport !== "") scale.value = withRepeat(withSpring(1.2), -1, true);
+                if (inputs.document !== '') scale.value = withRepeat(withSpring(1.2), -1, true);
                 else scale.value = withSpring(1);
                 setStatus(false)
                 break;
@@ -60,7 +85,7 @@ const InscriptionPages: FC<proprs> = ({ index, currentPage, prev, next, states }
                 break;
             case 4:
                 scale.value = withSpring(1);
-                if (inputs.signature !== '') scale.value = withRepeat(withSpring(1.2), -1, true);
+                if (inputs.signature !== null) scale.value = withRepeat(withSpring(1.2), -1, true);
                 else scale.value = withSpring(1);
                 setStatus(false)
                 break;
@@ -74,6 +99,7 @@ const InscriptionPages: FC<proprs> = ({ index, currentPage, prev, next, states }
             default: break;
         }
     }, [currentPage, status]);
+
     const animatedStyle = useAnimatedStyle(() => { return { transform: [{ scale: scale.value }], }; });
 
     //---------------------SERVICES FUNCTIONS-----------------------//
@@ -117,10 +143,35 @@ const InscriptionPages: FC<proprs> = ({ index, currentPage, prev, next, states }
         const { password_error, confirm_error } = inscription_inputs_request("reset", inputs)
         if (password_error !== '' || confirm_error !== '') { setError(inscription_inputs_request("reset", inputs)); return }
         else setError(error_init)
-        next()
+
+        const blob = new FormData()
+
+        if (!inputs.phone.includes(indicatif))
+            inputs.phone = indicatif + inputs.phone
+
+
+        blob.append("name", inputs.name)
+        blob.append("firstname", inputs.firstname)
+        blob.append("phone", inputs.phone)
+        blob.append("email", inputs.email)
+        blob.append("address", inputs.address)
+        blob.append("accountUBA", inputs.account)
+        blob.append("photo", inputs.profil)
+        blob.append("document", inputs.document)
+        blob.append("birthday", `${inputs.birthday}`)
+        blob.append("signature", inputs.signature)
+        blob.append("password", inputs.password)
+
+        dispatch(inscription_service(blob))
+        setClick(true)
     }
 
-    //--------------------------------------------------------------//
+    //----------------------------- ui ---------------------------------//
+
+    if (click && user_loading)
+        return <components.commons.loading />
+
+
     const RenderBtn = (func: any) =>
         <View style={css.auth.connexion.btnscontainer}>
             <View style={[styles.footer, { opacity: index > 0 ? 1 : 0 }]}>
@@ -147,7 +198,7 @@ const InscriptionPages: FC<proprs> = ({ index, currentPage, prev, next, states }
         case 0:
             return (
                 <View style={[{ width: wp('100%'), height: hp(100) }]}>
-                    <Infos inputs={inputs} currentPage={currentPage} setInputs={setInputs} error={error} />
+                    <Infos inputs={inputs} setIndicatif={setIndicatif} currentPage={currentPage} setInputs={setInputs} error={error} />
                     {RenderBtn(infoNext)}
                 </View>
             )

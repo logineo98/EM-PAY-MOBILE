@@ -1,5 +1,5 @@
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { components } from '../../../components'
 import { handleChangeMobile, images } from '../../../libs/constants/constants'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -11,14 +11,16 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 import { userModel } from '../../../libs/services/user/user.model'
 import PhoneInput from 'react-native-phone-number-input'
+import { supprimerOccurrence } from '../../../libs/constants/utils'
 
 const goto = { register: 'register', forgot: 'forgot' }
 
 
 
-type props = { index?: number, error?: { login_phone_error?: string, login_password_error?: string }, setError?: any, connexionInputs: userModel, setConnexionInputs: any, next: any }
-const Login: FC<props> = ({ index, connexionInputs, error, setError, setConnexionInputs, next }) => {
+type props = { index?: number, error?: { login_phone_error?: string, login_password_error?: string }, setError?: any, connexionInputs: userModel, setConnexionInputs: any, setIndicatif: any, next: any }
+const Login: FC<props> = ({ index, connexionInputs, error, setError, setIndicatif, setConnexionInputs, next }) => {
     const navigation = useNavigation<any>()
+    const [ind, setind] = useState('+223');
 
 
 
@@ -40,10 +42,12 @@ const Login: FC<props> = ({ index, connexionInputs, error, setError, setConnexio
                             <PhoneInput
                                 defaultCode="ML"
                                 layout="second"
-                                onChangeText={(text) => handleChangeMobile("phone", text, setConnexionInputs)}
+                                value={connexionInputs?.phone ? supprimerOccurrence(connexionInputs?.phone, ind) : ''}
+                                onChangeCountry={(text) => { setIndicatif(`+${text.callingCode[0]}`); setind(`+${text.callingCode[0]}`) }}
+                                onChangeText={(text) => { handleChangeMobile("phone", text, setConnexionInputs); }}
                                 codeTextStyle={{ alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}
                                 countryPickerButtonStyle={{ height: '100%' }}
-                                textInputStyle={{ padding: 0, color: colors.black }}
+                                textInputStyle={{ padding: 0, height: 45, color: colors.black }}
                                 textContainerStyle={{ padding: 0 }}
                                 containerStyle={{ height: 50 }}
                                 withDarkTheme

@@ -13,9 +13,8 @@ import { userModel } from '../../../libs/services/user/user.model';
 
 type props = { index?: number, currentPage?: number, error?: { document_error?: string, }, inputs: userModel, setError?: any, setInputs: any }
 const Document: FC<props> = ({ index, currentPage, error, setError, inputs, setInputs }: any) => {
-    const [files, setFiles] = useState<any>({ nina: '', passport: '', cin: '' });
+    const [files, setFiles] = useState<any>("");
     const [visible, setVisible] = useState(false);
-    const [fieldName, setFieldName] = useState('');
     const [img, setImg] = useState<any>();
 
     const selectImage = () => {
@@ -32,10 +31,7 @@ const Document: FC<props> = ({ index, currentPage, error, setError, inputs, setI
 
                                             const imgs = image?.split('/')
                                             const filename = imgs[imgs?.length - 1].split('.')[0]
-                                            setFiles((prevFiles: any) => ({
-                                                ...prevFiles,
-                                                [fieldName]: { uri: image, type: 'image/jpeg', name: filename + '-image.jpg' },
-                                            }));
+                                            setFiles({ uri: image, type: 'image/jpeg', name: filename + '-image.jpg' });
                                         }).catch((err: any) => { console.log(err) });
                                 }
                             })
@@ -53,15 +49,13 @@ const Document: FC<props> = ({ index, currentPage, error, setError, inputs, setI
 
                 if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                     const image = await ImageCropPicker.openCamera({ width: 300, height: 400, cropping: true, includeBase64: false })
+
                     setImg(image?.path)
                     const img = await CompressImg.compress(image?.path, { compressionMethod: 'auto', quality: 0.2 })
                     const imgs = image?.path?.split('/')
                     const filename = imgs[imgs?.length - 1].split('.')[0]
 
-                    setFiles((prevFiles: any) => ({
-                        ...prevFiles,
-                        [fieldName]: { uri: img, type: 'image/jpeg', name: filename + '-image.jpg' },
-                    }));
+                    setFiles({ uri: img, type: 'image/jpeg', name: filename + '-image.jpg' });
                 } else {
                     console.log('Permission refusée pour accéder à la caméra');
                 }
@@ -71,15 +65,13 @@ const Document: FC<props> = ({ index, currentPage, error, setError, inputs, setI
         setVisible(false)
     };
 
-
     useEffect(() => {
         setInputs({ ...inputs, document: files })
-        if (files && files?.nina === "" && files?.passport === "" && files?.cin === "") setError({ document_error: '' })
+        if (files && files !== null) setError({ document_error: '' })
     }, [files]);
 
-    const openModal = (fieldName: string) => {
+    const openModal = () => {
         setVisible(!visible)
-        setFieldName(fieldName)
     }
 
 
@@ -121,17 +113,17 @@ const Document: FC<props> = ({ index, currentPage, error, setError, inputs, setI
 
                 <View style={css.auth.connexion.inputbox}>
                     <View>
-                        <TouchableOpacity onPress={() => openModal('nina')} activeOpacity={0.8} style={[css.auth.connexion.documentbtn]}>
+                        <TouchableOpacity onPress={() => openModal()} activeOpacity={0.8} style={[css.auth.connexion.documentbtn]}>
                             <Text style={css.auth.connexion.btntext}>{inscription_screen.document.nina}</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity onPress={() => openModal('passport')} activeOpacity={0.8} style={[css.auth.connexion.documentbtn]}>
+                        <TouchableOpacity onPress={() => openModal()} activeOpacity={0.8} style={[css.auth.connexion.documentbtn]}>
                             <Text style={css.auth.connexion.btntext}>{inscription_screen.document.passport}</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity onPress={() => openModal("cin")} activeOpacity={0.8} style={[css.auth.connexion.documentbtn]}>
+                        <TouchableOpacity onPress={() => openModal()} activeOpacity={0.8} style={[css.auth.connexion.documentbtn]}>
                             <Text style={css.auth.connexion.btntext}>{inscription_screen.document.cin}</Text>
                         </TouchableOpacity>
                     </View>

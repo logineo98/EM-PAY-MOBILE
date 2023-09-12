@@ -26,7 +26,7 @@ const Photo: FC<props> = ({ index, error, currentPage, inputs, setInputs }: any)
     }, [currentPage]);
 
     useEffect(() => {
-        setInputs({ ...inputs, profil: imageSource })
+        setInputs({ ...inputs, profil: { uri: imageSource, type: 'image/jpeg', name: "profile" + '-image.jpg' } })
     }, [imageSource]);
 
 
@@ -35,6 +35,7 @@ const Photo: FC<props> = ({ index, error, currentPage, inputs, setInputs }: any)
             try {
                 const photo = await cameraRef.current.takePhoto({})
                 setImageSource('file:///' + photo.path)
+
             } catch (error: any) {
                 console.log(error.message)
             }
@@ -51,7 +52,7 @@ const Photo: FC<props> = ({ index, error, currentPage, inputs, setInputs }: any)
                 setImageSource('')
             }
         } catch (error) {
-            console.log('Error deleting image:', error);
+            console.log('Erreur de suppression d\'image:', error);
         }
     }
 

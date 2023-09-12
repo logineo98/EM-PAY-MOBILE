@@ -7,7 +7,7 @@ import { userModel } from '../../libs/services/user/user.model';
 const Inscription = () => {
     const flatListRef = useRef<any>(null);
     const scrollViewRef = useRef<any>(null);
-    const inscription_init: userModel = { phone: "", name: "", firstname: "", address: "", email: "", account: "", profil: "", document: { nina: '', passport: '', cin: '' }, password: "", confirm: "", birthday: "", signature: '' }
+    const inscription_init: userModel = { phone: "", name: "", firstname: "", address: "", email: "", account: "", profil: "", document: "", password: "", confirm: "", birthday: new Date(new Date().getTime()), signature: null }
     const [inputs, setInputs] = useState(inscription_init);
     const states = { inputs, setInputs }
     const [currentPage, setCurrentPage] = useState(0);
@@ -35,7 +35,7 @@ const Inscription = () => {
     return (
         <ScrollView ref={scrollViewRef} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
             <FlatList
-                style={{ height: hp(100) }}
+                style={{ height: hp('100%') }}
                 ref={flatListRef}
                 horizontal
                 showsHorizontalScrollIndicator={false}

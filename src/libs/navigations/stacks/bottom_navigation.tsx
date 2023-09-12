@@ -9,6 +9,8 @@ import { colors, roboto } from '../../typography/typography'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { ParamListBase, RouteProp, getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import Entypo from 'react-native-vector-icons/Entypo'
+import { checking } from '../../services/user/user.action'
+import { useDispatch } from 'react-redux'
 
 type COMPONENT_TYPE = {
     setScreenName: React.Dispatch<React.SetStateAction<string>>,
@@ -19,14 +21,18 @@ type COMPONENT_TYPE = {
 
 const BottomNavigation: FC<COMPONENT_TYPE> = ({ setScreenName, setBottomTabScreenName, displayCard, route }) => {
     const BottomTab = createBottomTabNavigator()
-
+    const [screen, setScreen] = useState('');
+    const dispatch = useDispatch<any>()
     const [show, setShow] = useState(false)
 
     useEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route)
 
         setBottomTabScreenName(routeName as string)
+        setScreen(routeName as string)
     }, [route])
+
+    useEffect(() => { dispatch(checking()) }, [screen, dispatch]);
 
     return (
         <View style={styles.container}>

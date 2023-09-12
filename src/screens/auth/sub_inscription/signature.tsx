@@ -6,7 +6,9 @@ import { components } from '../../../components';
 import { inscription_screen } from '../../../libs/i18n/fr.FR.json'
 import { CheckBox } from 'react-native-elements';
 import { css } from '../../../libs/styles/styles';
+import { Image as CompressImg } from 'react-native-compressor';
 import { userModel } from '../../../libs/services/user/user.model';
+import { Image } from 'react-native';
 
 
 type props = { index?: number, currentPage?: number, error?: { signature_error?: string, }, inputs: userModel, setError?: any, setInputs: any }
@@ -17,11 +19,20 @@ const Signature: FC<props> = ({ index, error, currentPage, inputs, setInputs }) 
 
     const resetSign = () => { signatureRef.current.resetImage(); setInputs({ ...inputs, signature: '' }) };
     const _onSaveEvent = (result: any) => { setSign(result?.pathName); };
-    const _onDragEvent = () => { setSign(signatureRef.current.saveImage()) };
+    const _onDragEvent = () => { signatureRef.current.saveImage() };
 
     useEffect(() => {
         if (sign === "") setInputs({ ...inputs, signature: "" })
-        setInputs({ ...inputs, signature: sign })
+
+        const comp = async () => {
+            try {
+                const img = await CompressImg.compress(`file:///${sign}`, { output: "png", compressionMethod: "auto", quality: 0.5, })
+                setInputs({ ...inputs, signature: { uri: img, type: 'image/png', name: 'signature.png' } })
+            } catch (error: any) {
+                console.log("signature log:", error.message)
+            }
+        }
+        comp()
     }, [sign]);
 
 
@@ -40,10 +51,9 @@ const Signature: FC<props> = ({ index, error, currentPage, inputs, setInputs }) 
                         ref={signatureRef}
                         onSaveEvent={_onSaveEvent}
                         onDragEvent={_onDragEvent}
-                        saveImageFileInExtStorage={false}
+                        saveImageFileInExtStorage={true}
                         showNativeButtons={false}
                         showTitleLabel={false}
-
                         viewMode={"portrait"} />
 
 
@@ -60,8 +70,6 @@ const Signature: FC<props> = ({ index, error, currentPage, inputs, setInputs }) 
             <View>
                 <CheckBox title={<Text style={{ color: colors.black, fontFamily: roboto.light }}>{inscription_screen.identity.signature.authorize}</Text>} checked={isChecked} onPress={() => setIsChecked(!isChecked)} />
             </View>
-
-
         </components.commons.container>
 
     );

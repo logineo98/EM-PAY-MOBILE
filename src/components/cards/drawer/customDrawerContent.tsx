@@ -8,10 +8,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { logout } from '../../../libs/services/user/user.action'
+import { useDispatch } from 'react-redux'
 
 type COMPONENT_TYPE = { navigation: DrawerNavigationHelpers, screenName: string }
 
 const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => {
+    const dispatch = useDispatch<any>()
+
 
     const call = () => {
         let phoneNumber = ''
@@ -105,7 +109,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
                 </ScrollView>
             </View>
 
-            <TouchableOpacity style={{ ...styles.item_container, ...styles.item_container_deconnexion }} activeOpacity={0.5}>
+            <TouchableOpacity onPress={() => dispatch(logout())} style={{ ...styles.item_container, ...styles.item_container_deconnexion }} activeOpacity={0.5}>
                 <View style={styles.item_icon_name_container} >
                     <MaterialCommunityIcons name='logout' style={styles.item_icon} size={25} color={colors.black} />
                     <Text style={styles.item_name}>Déconnexion</Text>

@@ -4,6 +4,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { components } from '../../components'
 import { Screens } from '../../screens'
 import { ParamListBase, RouteProp, getFocusedRouteNameFromRoute } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+import { checking } from '../services/user/user.action'
 
 type COMPONENT_TYPE = {
     route: RouteProp<ParamListBase, 'main'>
@@ -11,15 +13,16 @@ type COMPONENT_TYPE = {
 
 const Navigation: FC<COMPONENT_TYPE> = ({ route }) => {
     const Drawer = createDrawerNavigator()
-
+    const dispatch = useDispatch<any>()
     const [screenName, setScreenName] = useState('')
     const [displayCard, setDisplayCard] = useState(true)
 
     useEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route)
-
         setScreenName(routeName as string)
     }, [route])
+
+    useEffect(() => { dispatch(checking()) }, [screenName, dispatch]);
 
     return (
         <Drawer.Navigator initialRouteName='bottom'

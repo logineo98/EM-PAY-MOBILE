@@ -6,7 +6,7 @@ export const connexion_request = (toStore: userModel) => {
     let error = { login_phone_error: '', login_password_error: '' }
 
     if (!toStore.phone || toStore.phone === "") error = { login_phone_error: connexion_screen.errors.phone_field_empty, login_password_error: '' }
-    if (!toStore.password || toStore.password === "") error = { login_phone_error: '', login_password_error: connexion_screen.errors.password_field_empty }
+    if (!toStore.password || toStore.password === "") error = { ...error, login_password_error: connexion_screen.errors.password_field_empty }
     else if (toStore.password.length < 6) error = { login_phone_error: '', login_password_error: connexion_screen.errors.incorrect }
     return error;
 }
@@ -44,7 +44,7 @@ export const inscription_inputs_request = (type: string, toStore: userModel) => 
             if (!toStore.phone || toStore.phone === "") errors = { ...errors, phone_error: connexion_screen.errors.password_field_empty }
             if (!toStore.name || toStore.name === "") errors = { ...errors, name_error: connexion_screen.errors.incorrect, }
             if (!toStore.firstname || toStore.firstname === "") errors = { ...errors, firstname_error: connexion_screen.errors.incorrect, }
-            if (!toStore.birthday || toStore.birthday === "") errors = { ...errors, birth_error: connexion_screen.errors.incorrect, }
+            if (!toStore.birthday || toStore.birthday === null) errors = { ...errors, birth_error: connexion_screen.errors.incorrect, }
             return errors
 
         case "account":
@@ -53,7 +53,7 @@ export const inscription_inputs_request = (type: string, toStore: userModel) => 
             return errors
 
         case "document":
-            if (!toStore.document || (toStore.document.cin === "" && toStore.document.passport === "" && toStore.document.nina === ""))
+            if (!toStore.document || toStore.document === "")
                 errors = { ...errors, document_error: connexion_screen.errors.password_field_empty }
             return errors
 
@@ -63,7 +63,7 @@ export const inscription_inputs_request = (type: string, toStore: userModel) => 
 
 
         case "signature":
-            if (!toStore.signature || toStore.signature === "") errors = { ...errors, signature_error: connexion_screen.errors.password_field_empty }
+            if (!toStore.signature || toStore.signature === null) errors = { ...errors, signature_error: connexion_screen.errors.password_field_empty }
             return errors
 
         case "reset":

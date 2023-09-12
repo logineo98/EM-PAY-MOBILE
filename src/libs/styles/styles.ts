@@ -3,22 +3,22 @@ export const drawer = {
 }
 
 import { StyleSheet } from "react-native";
-import { colors, height, hp, roboto, width, wp } from "../typography/typography";
+import { colors, hp, roboto, wp } from "../typography/typography";
 
 
 
 const connexion = StyleSheet.create({
 
-    connexion_container: { height: '90%', justifyContent: "flex-end" },
-    content: { gap: 15, flex: 1, justifyContent: "center" },
+    connexion_container: { height: '90%', width: wp('100%'), justifyContent: "flex-end" },
+    content: { gap: 15, flex: 1, justifyContent: "center", width: "100%", },
     logobox: { height: '25%', alignItems: 'center', justifyContent: 'center' },
     logo: { width: '90%', height: '90%', resizeMode: 'contain' },
     textbox: { gap: hp(2), marginVertical: hp(2) },
     title: { fontSize: hp(3.5), fontFamily: roboto.bold, textAlign: 'center', color: colors.black },
     description: { fontSize: wp(3.3), fontFamily: roboto.thin, textAlign: 'center', color: colors.black },
 
-    inputbox: { gap: 10 },
-    inputfield: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 0.8, borderColor: colors.placeholder, borderRadius: wp(1.5), paddingHorizontal: wp(1.5) },
+    inputbox: { gap: 10, width: '100%' },
+    inputfield: { width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 0.8, borderColor: colors.placeholder, borderRadius: wp(1.5), paddingHorizontal: wp(1.5) },
     inputicon: { fontSize: wp(6), color: colors.auth_icon },
     input: { flex: 1, paddingHorizontal: wp(2), color: colors.black },
     errortext: { paddingRight: 5, color: "tomato", alignSelf: 'flex-end', fontFamily: roboto.boldItalic, fontSize: 9 },
@@ -33,7 +33,7 @@ const connexion = StyleSheet.create({
     loginbtn_txt: { color: colors.white, fontSize: 24 },
     verifycell: { width: hp(9), height: hp(9), borderRadius: 4, alignItems: 'center', justifyContent: 'center', lineHeight: 60, fontSize: 28, borderWidth: 2, borderColor: colors.auth_icon, textAlign: 'center', color: colors.black },
     verifyfocusCell: { borderColor: colors.fond1, color: colors.fond1 },
-    btnscontainer: { flexDirection: 'row', justifyContent: 'space-between', flex: 1 },
+    btnscontainer: { flexDirection: 'row', justifyContent: 'space-between', flex: 1, width: wp('100%') },
 
     //compte
     accounttitle: { color: colors.black },
