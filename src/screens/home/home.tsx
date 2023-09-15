@@ -1,4 +1,4 @@
-import { FlatList, Image, ImageProps, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { FC, useState } from 'react'
 import { images } from '../../libs/constants/constants'
 import { colors, roboto, width } from '../../libs/typography/typography'
@@ -7,10 +7,14 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { StackNavigationHelpers } from '@react-navigation/stack/lib/typescript/src/types'
 import { components } from '../../components'
 import Entypo from 'react-native-vector-icons/Entypo'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../libs/services/store'
+import { PARTNER_TYPE } from '../../libs/services/partner/partner.model'
+import { _end_point } from '../../libs/services/endpoints'
 
-const Item = (item: { logo: ImageProps, name: string, description: string }) => (
+const Item = (item: PARTNER_TYPE) => (
     <View style={styles.partenaire_logo_container}>
-        <Image source={item.logo} style={styles.partenaire_logo} />
+        <Image source={{ uri: `${_end_point.api_img}/${item.logo}` }} style={styles.partenaire_logo} />
     </View>
 )
 
@@ -24,18 +28,7 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
     const [displayCardVerso, setDisplayCardVerso] = useState(false)
     const [show, setShow] = useState(false)
 
-    const partenaires = [
-        { id: '1', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '2', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '3', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '4', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '5', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '6', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '7', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '8', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '9', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-        { id: '10', logo: images.logo_png, name: 'Emploi et moi', description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, animi.' },
-    ]
+    const { allPartners } = useSelector((state: RootState) => state?.partner)
 
     return (
         <components.commons.screen_container style={{ paddingBottom: !show ? 50 : 100, }}>
@@ -105,9 +98,9 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
 
                     <View style={styles.partenaire_container}>
                         <FlatList
-                            data={partenaires}
+                            data={allPartners}
                             renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
-                            keyExtractor={item => item.id}
+                            keyExtractor={item => item.id as string}
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}
                         />
@@ -170,7 +163,7 @@ const styles = StyleSheet.create({
 
     partenaire_container: { justifyContent: 'center', marginBottom: 10, },
     partenaire_logo_container: { alignItems: 'center', justifyContent: 'center', height: width * 0.17, width: width * 0.17, borderRadius: width * 0.17, marginRight: 2, borderWidth: 1, borderColor: colors.fond1, },
-    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.17 },
+    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'contain', borderRadius: width * 0.17 },
 
     bottom_tab_global_container: { width: width, paddingVertical: 5, position: 'absolute', bottom: 0, alignItems: 'center', justifyContent: 'center', },
     plus_minus_icon_container: { backgroundColor: colors.tz_blue, height: 40, width: 40, borderRadius: 40, alignItems: 'center', justifyContent: 'center', },

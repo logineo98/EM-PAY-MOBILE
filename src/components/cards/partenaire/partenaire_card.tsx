@@ -1,10 +1,12 @@
-import { Image, ImageProps, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { FC, useState } from 'react'
 import { colors, height, roboto, width } from '../../../libs/typography/typography'
 import { Overlay } from 'react-native-elements'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { PARTNER_TYPE } from '../../../libs/services/partner/partner.model'
+import { _end_point } from '../../../libs/services/endpoints'
 
-type COMPONENT_TYPE = { logo: ImageProps, name: string, description: string }
+type COMPONENT_TYPE = PARTNER_TYPE
 
 const PartenaireCard: FC<COMPONENT_TYPE> = ({ logo, name, description }) => {
 
@@ -16,7 +18,7 @@ const PartenaireCard: FC<COMPONENT_TYPE> = ({ logo, name, description }) => {
             <TouchableOpacity activeOpacity={0.5} style={styles.partenaire} onPress={() => { setVisible(true) }}>
                 <View style={styles.partenaire_logo_name}>
                     <View style={styles.partenaire_logo_container}>
-                        <Image source={logo} style={styles.partenaire_logo} />
+                        <Image source={{ uri: `${_end_point.api_img}/${logo}` }} style={styles.partenaire_logo} />
                     </View>
                     <Text style={styles.partenaire_name} numberOfLines={1}> {name} </Text>
                 </View>
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     partenaire: { backgroundColor: colors.white, padding: 10, borderWidth: 1, borderColor: colors.fond1, borderRadius: 10, },
     partenaire_logo_name: { flexDirection: 'row', alignItems: 'center', },
     partenaire_logo_container: { height: width * 0.17, width: width * 0.17, },
-    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: width * 0.17 },
+    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'contain', borderRadius: width * 0.17 },
     partenaire_name: { color: colors.black, fontFamily: roboto.black, marginLeft: 10, textTransform: 'uppercase' },
     partenaire_description: { color: colors.black, fontFamily: roboto.regular, textAlign: 'justify', fontSize: 13 },
 

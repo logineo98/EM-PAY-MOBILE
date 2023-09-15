@@ -5,7 +5,8 @@ import { components } from '../../components'
 import { Screens } from '../../screens'
 import { ParamListBase, RouteProp, getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
-import { checking } from '../services/user/user.action'
+import { checking, getAllusers } from '../services/user/user.action'
+import { getAllPartners } from '../services/partner/partner.action'
 
 type COMPONENT_TYPE = {
     route: RouteProp<ParamListBase, 'main'>
@@ -22,7 +23,11 @@ const Navigation: FC<COMPONENT_TYPE> = ({ route }) => {
         setScreenName(routeName as string)
     }, [route])
 
-    useEffect(() => { dispatch(checking()) }, [screenName, dispatch]);
+    useEffect(() => {
+        dispatch(checking())
+        dispatch(getAllPartners())
+        dispatch(getAllusers())
+    }, [screenName, dispatch])
 
     return (
         <Drawer.Navigator initialRouteName='bottom'
@@ -39,8 +44,8 @@ const Navigation: FC<COMPONENT_TYPE> = ({ route }) => {
             <Drawer.Screen name='partenaire' component={Screens.Home.partenaire} />
             <Drawer.Screen name='a_propos' component={Screens.Home.a_propos} />
             <Drawer.Screen name='tarif' component={Screens.Home.tarif} />
-            <Drawer.Screen name='status' component={Screens.Home.status} />
-            <Drawer.Screen name='geolocalisation' component={Screens.Home.geolocalisation} />
+            <Drawer.Screen name='status' children={({ }) => <Screens.Home.status screenName={screenName} />} />
+            <Drawer.Screen name='geolocalisation' children={({ }) => <Screens.Home.geolocalisation screenName={screenName} />} />
             <Drawer.Screen name='historique' component={Screens.Home.historique} />
             <Drawer.Screen name='service_client' component={Screens.Home.serviceClient} />
             {/* <Drawer.Screen name='bottom' children={({ route }) => <BottomNavigation route={route} setScreenName={setScreenName} setBottomTabScreenName={setBottomTabScreenName} displayCard={displayCard} />} /> */}

@@ -75,3 +75,14 @@ export const inscription_inputs_request = (type: string, toStore: userModel) => 
         default: return errors
     }
 }
+
+/****************************STATUT GEOLOCALISATION*********************************** */
+export const status_geo_montant_request = (montant: string) => {
+    const initialError = { montant: '' }
+    let error = initialError
+
+    if (!montant || montant.trim() === '') error = { ...error, montant: 'Veuillez renseigner le montant.' }
+    else if (parseInt(montant, 10) < 500) error = { ...error, montant: 'Montant doit être superieur à 500 FCFA.' }
+
+    return { error, initialError }
+}

@@ -5,7 +5,18 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true
+        "**/Thumbs.db": true,
+        "node_modules": true,
+        ".bundle": true,
+        ".vscode": true,
+        "__tests__": true,
+        "ios": true
     },
-    "hide-files.files": []
+    "hide-files.files": [
+        "node_modules",
+        ".bundle",
+        ".vscode",
+        "__tests__",
+        "ios"
+    ]
 }
