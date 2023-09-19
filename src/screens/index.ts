@@ -12,6 +12,7 @@ import Status from "./home/status";
 import Tarif from "./home/tarif";
 import Historique from "./home/historique";
 import ServiceClient from "./home/service_client";
+import IkaWariTaaStatus from "./home/ika_wari_taa_status";
 
 export const Screens = {
     Auth: {
@@ -24,6 +25,7 @@ export const Screens = {
         facture: Facture,
         recharge: Recharge,
         ika_wari_taa: IkaWariTaa,
+        ika_wari_taa_status: IkaWariTaaStatus,
         a_propos: APropos,
         tarif: Tarif,
         partenaire: Partenaires,

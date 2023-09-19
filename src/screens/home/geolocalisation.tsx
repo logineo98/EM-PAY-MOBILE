@@ -12,7 +12,7 @@ type COMPONENT_TYPE = {
 
 const Geolocalisation: FC<COMPONENT_TYPE> = ({ screenName }) => {
 
-    const { allUsers } = useSelector((state: RootState) => state?.user)
+    const { user_loading, allUsers } = useSelector((state: RootState) => state?.user)
 
     const [initialRegion, setInitialRegion] = useState<{ latitude: number, longitude: number, latitudeDelta: number, longitudeDelta: number }>()
 
@@ -24,7 +24,7 @@ const Geolocalisation: FC<COMPONENT_TYPE> = ({ screenName }) => {
                 if (granted === PermissionsAndroid.RESULTS.GRANTED)
                     if (screenName === 'geolocalisation')
                         Geolocation.getCurrentPosition(info => {
-                            setInitialRegion({ latitude: info.coords.latitude, longitude: info.coords.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01 })
+                            setInitialRegion({ latitude: info.coords.latitude, longitude: info.coords.longitude, latitudeDelta: 0.5, longitudeDelta: 0.5 })
                         })
             } catch (err) { console.warn(err) }
         })()
@@ -33,6 +33,7 @@ const Geolocalisation: FC<COMPONENT_TYPE> = ({ screenName }) => {
 
     return (
         <components.commons.screen_container title='Géolocalisation'>
+            {/* {user_loading ? <components.commons.loading title='Veuillez patienter pendant le chargement des données.' /> : */}
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flex: 1 }}>
                 <MapView
                     style={{ width: '100%', height: '100%' }}
@@ -45,10 +46,9 @@ const Geolocalisation: FC<COMPONENT_TYPE> = ({ screenName }) => {
                             title={user?.name} description={`${user?.montant} FCFA`}
                         />
                     ))}
-
                 </MapView>
-
             </ScrollView>
+            {/*  } */}
         </components.commons.screen_container>
     )
 }

@@ -6,16 +6,19 @@ import { RootState } from '../../libs/services/store'
 
 const Partenaire = () => {
 
-    const { allPartners } = useSelector((state: RootState) => state?.partner)
+    const { loadingPartner, allPartners } = useSelector((state: RootState) => state?.partner)
 
     return (
         <components.commons.screen_container title='Partenaires'>
-            <FlatList
-                data={allPartners}
-                renderItem={({ item }) => <components.cards.partenaire_card logo={item.logo} name={item.name} description={item.description} />}
-                keyExtractor={item => item.id}
-                showsHorizontalScrollIndicator={false}
-            />
+            {loadingPartner ? <components.commons.loading title='Veuillez patienter pendant le chargement des données.' /> :
+                allPartners?.length === 0 ? <components.commons.no_element message='Aucun partenaire trouvé.' /> :
+                    <FlatList
+                        data={allPartners}
+                        renderItem={({ item }) => <components.cards.partenaire_card logo={item.logo} name={item.name} description={item.description} />}
+                        keyExtractor={item => item?.id as string}
+                        showsVerticalScrollIndicator={false}
+                    />
+            }
         </components.commons.screen_container>
     )
 }

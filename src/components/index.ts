@@ -6,6 +6,7 @@ import Container from "./commons/container";
 import CustomLoader from "./commons/custom_loading";
 import CustomRadioButton from "./commons/custom_radio_button";
 import Header from "./commons/header/header";
+import NoElementFind from "./commons/no_element_find";
 import ScreenContainer from "./commons/tz/screen_container";
 import HistoriqueCard from "./historique/historique_card";
 
@@ -16,6 +17,7 @@ export const components = {
         loading: CustomLoader,
         container: Container,
         radio: CustomRadioButton,
+        no_element: NoElementFind
     },
     cards: {
         customDrawerContent: CustomDrawerContent,

@@ -24,7 +24,7 @@ const userReducer = (state = initial, action: IAction): userStore => {
         case get_all_users: return { ...state, user_errors: false, user_loading: false, allUsers: action.payload, }
         case user_status_geo_montant: return { ...state, user_errors: false, user_loading: false, host: action.payload.usr, }
         case get_qr_code: return { ...state, user_errors: false, user_loading: false, qr_code: action.payload, }
-        case scan_qr_code: return { ...state, user_errors: false, user_loading: false, scan_response: action.payload, }
+        case scan_qr_code: return { ...state, user_errors: false, user_loading: false, scan_response: action.payload.info, scan_response_status: action.payload.status }
 
         case 'reset_tmp': return { ...state, tmp: false }
         case 'reset_info': return { ...state, info: null }

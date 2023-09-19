@@ -28,12 +28,12 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
     const [displayCardVerso, setDisplayCardVerso] = useState(false)
     const [show, setShow] = useState(false)
 
-    const { allPartners } = useSelector((state: RootState) => state?.partner)
+    const { allPartners, loadingPartner } = useSelector((state: RootState) => state?.partner)
 
     return (
         <components.commons.screen_container style={{ paddingBottom: !show ? 50 : 100, }}>
             <>
-                <ScrollView showsHorizontalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container} onPress={() => setDisplayCardVerso(prev => !prev)}>
                         {displayCard &&
                             <View style={styles.virtual_card_container}>
@@ -96,15 +96,20 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
                         </View>
                     </View>
 
-                    <View style={styles.partenaire_container}>
-                        <FlatList
-                            data={allPartners}
-                            renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
-                            keyExtractor={item => item.id as string}
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                        />
-                    </View>
+                    {loadingPartner ? <components.commons.loading /> :
+                        <View style={styles.partenaire_container}>
+                            {allPartners?.length === 0 ?
+                                <components.commons.no_element message='Aucun partenaire trouvé.' /> :
+                                <FlatList
+                                    data={allPartners}
+                                    renderItem={({ item }) => <Item logo={item.logo} name={item.name} description={item.description} />}
+                                    keyExtractor={item => item.id as string}
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                />
+                            }
+                        </View>
+                    }
                 </ScrollView>
 
                 <View style={styles.bottom_tab_global_container}>
@@ -116,17 +121,17 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
                         <View style={styles.bottom_tab_container}>
                             <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('geolocalisation')}>
                                 <MaterialCommunityIcons name='map-marker-radius-outline' size={25} color={colors.black} />
-                                <Text style={{ color: colors.black, fontSize: 8 }}>Carte géolocalisation</Text>
+                                <Text style={styles.bottom_tab_name}>Carte géolocalisation</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('historique')}>
                                 <MaterialCommunityIcons name='history' size={25} color={colors.black} />
-                                <Text style={{ color: colors.black, fontSize: 8 }}>Historique</Text>
+                                <Text style={styles.bottom_tab_name}>Historique</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('service_client')}>
                                 <MaterialCommunityIcons name='phone-outgoing' size={25} color={colors.black} />
-                                <Text style={{ color: colors.black, fontSize: 8 }}>Service client</Text>
+                                <Text style={styles.bottom_tab_name}>Service client</Text>
                             </TouchableOpacity>
                         </View>
                     }
@@ -149,8 +154,8 @@ const styles = StyleSheet.create({
 
     menu_home_container: { flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', marginBottom: 10 },
     menu_home: { alignItems: 'center' },
-    menu_icon_container: { height: width * 0.17, width: width * 0.17, },
-    menu_icon: { height: '100%', width: '100%', borderRadius: width * 0.17, borderWidth: 1, borderColor: colors.fond1, textAlign: 'center', verticalAlign: 'middle' },
+    menu_icon_container: { height: 60, width: 60, },
+    menu_icon: { height: '100%', width: '100%', borderRadius: 60, borderWidth: 1, borderColor: colors.fond1, textAlign: 'center', verticalAlign: 'middle' },
     menu_name: { color: colors.black, fontFamily: roboto.regular, fontSize: 10 },
 
     historique_container: { marginTop: 10, marginBottom: 20, },
@@ -161,14 +166,15 @@ const styles = StyleSheet.create({
     historique_separator: { height: 1, width: '35%', color: colors.black, borderWidth: 1, borderStyle: 'dashed' },
     historique_price: { width: '30%', color: colors.black, fontFamily: roboto.regular, },
 
-    partenaire_container: { justifyContent: 'center', marginBottom: 10, },
-    partenaire_logo_container: { alignItems: 'center', justifyContent: 'center', height: width * 0.17, width: width * 0.17, borderRadius: width * 0.17, marginRight: 2, borderWidth: 1, borderColor: colors.fond1, },
-    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'contain', borderRadius: width * 0.17 },
+    partenaire_container: { justifyContent: 'center', alignItems: 'center', marginBottom: 10, },
+    partenaire_logo_container: { alignItems: 'center', justifyContent: 'center', height: 60, width: 60, borderRadius: 60, marginRight: 10, borderWidth: 1, borderColor: colors.fond1, },
+    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'contain', borderRadius: 60 },
 
     bottom_tab_global_container: { width: width, paddingVertical: 5, position: 'absolute', bottom: 0, alignItems: 'center', justifyContent: 'center', },
     plus_minus_icon_container: { backgroundColor: colors.tz_blue, height: 40, width: 40, borderRadius: 40, alignItems: 'center', justifyContent: 'center', },
     bottom_tab_container: { backgroundColor: colors.white, width: '95%', flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 5, borderRadius: 10, },
     bottom_tab: { alignItems: 'center', justifyContent: 'center', },
+    bottom_tab_name: { color: colors.black, fontSize: 8, fontFamily: roboto.regular },
 
 })
 

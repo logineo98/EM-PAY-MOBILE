@@ -20,7 +20,7 @@ const Welcome: FC<proprs> = () => {
     useEffect(() => { dispatch(checking()) }, [dispatch]);
 
     if (user_loading)
-        return <components.commons.loading />
+        return <components.commons.loading title='Veuillez patienter pendant le chargement des données.' />
 
     return (
         <ImageBackground source={images.bg} style={css.auth.welcome.welcomebgimg}>

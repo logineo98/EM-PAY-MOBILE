@@ -2,27 +2,27 @@ import { FlatList, StyleSheet, Text, } from 'react-native'
 import React from 'react'
 import { components } from '../../components'
 import { colors, roboto, } from '../../libs/typography/typography'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../libs/services/store'
 
 const Tarif = () => {
 
-    const tarifs = [
-        { id: '1', pourcentage: '0 FCFA', description: 'Sur les frais de rétrait.', },
-        { id: '2', pourcentage: '1,5%', description: 'Sur le montant de la recharge.', },
-        { id: '3', pourcentage: '2%', description: 'Sur le montant de la recharge VIA MOBILE MONEY (ORANGE MONEY, MOOV MONEY)', },
-        { id: '4', pourcentage: '500 FCFA', description: 'Retrait dans tous les guichets GIM-UEMOA.', },
-    ]
+    const { loadingTarif, allTarifs } = useSelector((state: RootState) => state?.tarif)
 
     return (
         <components.commons.screen_container title='Tarifs'>
             <>
                 <Text style={styles.tarif_presentation}>Présentation des frais globaux de la carte</Text>
 
-                <FlatList
-                    data={tarifs}
-                    renderItem={({ item }) => <components.cards.tarif_card pourcentage={item.pourcentage} description={item.description} />}
-                    keyExtractor={item => item.id}
-                    showsHorizontalScrollIndicator={false}
-                />
+                {loadingTarif ? <components.commons.loading title='Veuillez patienter pendant le chargement des données.' /> :
+                    allTarifs?.length === 0 ? <components.commons.no_element message='Aucun tarif trouvé.' /> :
+                        <FlatList
+                            data={allTarifs}
+                            renderItem={({ item }) => <components.cards.tarif_card tarif={item.tarif} description={item.description} />}
+                            keyExtractor={item => item?.id as string}
+                            showsVerticalScrollIndicator={false}
+                        />
+                }
             </>
         </components.commons.screen_container>
     )

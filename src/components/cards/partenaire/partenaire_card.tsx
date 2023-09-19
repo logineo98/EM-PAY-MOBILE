@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     partenaire_container: { marginBottom: 10 },
     partenaire: { backgroundColor: colors.white, padding: 10, borderWidth: 1, borderColor: colors.fond1, borderRadius: 10, },
     partenaire_logo_name: { flexDirection: 'row', alignItems: 'center', },
-    partenaire_logo_container: { height: width * 0.17, width: width * 0.17, },
-    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'contain', borderRadius: width * 0.17 },
+    partenaire_logo_container: { height: 60, width: 60, },
+    partenaire_logo: { height: '100%', width: '100%', resizeMode: 'contain', borderRadius: 60 },
     partenaire_name: { color: colors.black, fontFamily: roboto.black, marginLeft: 10, textTransform: 'uppercase' },
     partenaire_description: { color: colors.black, fontFamily: roboto.regular, textAlign: 'justify', fontSize: 13 },
 

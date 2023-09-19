@@ -21,7 +21,7 @@ const Status: FC<COMPONENT_TYPE> = ({ screenName }) => {
     const [dataToSend, setDataToSend] = useState(data)
     const [err, setErr] = useState<{ montant: string }>()
 
-    const { host } = useSelector((state: RootState) => state?.user)
+    const { host, user_loading } = useSelector((state: RootState) => state?.user)
     const dispatch = useDispatch<any>()
 
     const handleSwitchBtn = (value: boolean) => {
@@ -69,33 +69,31 @@ const Status: FC<COMPONENT_TYPE> = ({ screenName }) => {
                 console.warn(err)
             }
         })()
-
-
-
     }, [screenName])
 
     return (
         <components.commons.screen_container title='Statuts'>
-            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
-                <View style={styles.visibility_container}>
-                    <Text style={styles.visibility_name}>STATUT</Text>
-                    <Switch value={checked} onValueChange={(value) => handleSwitchBtn(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={checked ? colors.fond1 : '#f4f3f4'} />
-                </View>
-
-                <View style={styles.amount_error_container}>
-                    <View style={styles.amount_container}>
-                        <Text style={styles.amount_name}>Montant disponible</Text>
-                        <TextInput style={[styles.amount_price, { backgroundColor: checked ? colors.divider : 'transparent' }]} keyboardType='numeric' editable={!checked} value={dataToSend?.montant} onChangeText={text => setDataToSend({ ...dataToSend, montant: text })} />
+            {user_loading ? <components.commons.loading title='Veuillez patienter pendant le chargement des données.' /> :
+                <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
+                    <View style={styles.visibility_container}>
+                        <Text style={styles.visibility_name}>STATUT</Text>
+                        <Switch value={checked} onValueChange={(value) => handleSwitchBtn(value)} trackColor={{ false: '#767577', true: '#767577' }} thumbColor={checked ? colors.fond1 : '#f4f3f4'} />
                     </View>
-                    {err?.montant && <Text style={styles.error}> {err?.montant} </Text>}
-                </View>
 
-                <Text style={styles.description_status}>
-                    En activant votre statut vous émettez le souhait d’un retrait d’argent du
-                    montant inscrit dans le champs ci-dessus.
-                </Text>
+                    <View style={styles.amount_error_container}>
+                        <View style={styles.amount_container}>
+                            <Text style={styles.amount_name}>Montant disponible</Text>
+                            <TextInput style={[styles.amount_price, { backgroundColor: checked ? colors.divider : 'transparent' }]} keyboardType='numeric' editable={!checked} value={dataToSend?.montant} onChangeText={text => setDataToSend({ ...dataToSend, montant: text })} />
+                        </View>
+                        {err?.montant && <Text style={styles.error}> {err?.montant} </Text>}
+                    </View>
 
-            </ScrollView>
+                    <Text style={styles.description_status}>
+                        En activant votre statut vous émettez le souhait d'un retrait d'argent du
+                        montant inscrit dans le champs ci-dessus.
+                    </Text>
+                </ScrollView>
+            }
         </components.commons.screen_container>
     )
 }

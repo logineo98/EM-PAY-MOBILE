@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { FC } from 'react'
 import { colors, roboto } from '../../../libs/typography/typography'
+import { TARIF_TYPE } from '../../../libs/services/tarif/tarif.model'
 
-type COMPONENT_TYPE = { pourcentage: string, description: string }
+type COMPONENT_TYPE = TARIF_TYPE
 
-const TarifCard: FC<COMPONENT_TYPE> = ({ pourcentage, description }) => {
+const TarifCard: FC<COMPONENT_TYPE> = ({ tarif, description }) => {
 
     return (
         <View style={styles.tarif_container}>
-            <Text style={styles.tarif_pourcentage}> {pourcentage} </Text>
+            <Text style={styles.tarif_pourcentage}> {tarif} </Text>
             <Text style={styles.tarif_description}> {description} </Text>
         </View>
     )

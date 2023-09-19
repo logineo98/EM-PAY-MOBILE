@@ -16,7 +16,8 @@ const ScreenContainer: FC<COMPONENT_TYPE> = ({ children, style, title }) => (
             </View> :
             children
         }
-    </View>)
+    </View>
+)
 
 const styles = StyleSheet.create({
     container_global: { flex: 1, padding: 10, },

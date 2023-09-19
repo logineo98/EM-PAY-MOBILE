@@ -39,11 +39,19 @@ export const _end_point = {
         scanner_traitement: `${_API_BASE}/customers/scanner-traitement`, //post
     },
     partenaire: {
-        register: `${_API_BASE}/partenaires/register`, //post
+        register: `${_API_BASE}/partenaires/register`,  //post
         find: `${_API_BASE}/partenaires`,               //get
 
         show: `${_API_BASE}/partenaires`,              //get
         update: `${_API_BASE}/partenaires`,            //put
         remove: `${_API_BASE}/partenaires`,            //delete
+    },
+    tarif: {
+        register: `${_API_BASE}/tarifs/register`,   //post
+        find: `${_API_BASE}/tarifs`,                //get
+
+        show: `${_API_BASE}/tarifs/:id`,            //get
+        update: `${_API_BASE}/tarifs/:id`,          //put
+        delete: `${_API_BASE}/tarifs/:id`,          //delete
     }
 }

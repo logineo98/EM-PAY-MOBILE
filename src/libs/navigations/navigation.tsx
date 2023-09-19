@@ -7,6 +7,7 @@ import { ParamListBase, RouteProp, getFocusedRouteNameFromRoute } from '@react-n
 import { useDispatch } from 'react-redux'
 import { checking, getAllusers } from '../services/user/user.action'
 import { getAllPartners } from '../services/partner/partner.action'
+import { getAllTarifs } from '../services/tarif/tarif.action'
 
 type COMPONENT_TYPE = {
     route: RouteProp<ParamListBase, 'main'>
@@ -25,8 +26,10 @@ const Navigation: FC<COMPONENT_TYPE> = ({ route }) => {
 
     useEffect(() => {
         dispatch(checking())
-        dispatch(getAllPartners())
-        dispatch(getAllusers())
+        if (screenName !== 'ika_wari_taa' && screenName !== 'ika_wari_taa_status') { dispatch(getAllusers()) }
+
+        if (screenName === undefined || screenName === 'partenaire' || screenName === 'home') dispatch(getAllPartners())
+        if (screenName === 'tarif') dispatch(getAllTarifs())
     }, [screenName, dispatch])
 
     return (
@@ -38,7 +41,8 @@ const Navigation: FC<COMPONENT_TYPE> = ({ route }) => {
             }}
         >
             <Drawer.Screen name='home' children={({ navigation }) => <Screens.Home.home navigation={navigation} displayCard={displayCard} />} />
-            <Drawer.Screen name='ika_wari_taa' component={Screens.Home.ika_wari_taa} />
+            <Drawer.Screen name='ika_wari_taa' children={({ navigation }) => <Screens.Home.ika_wari_taa navigation={navigation} screenName={screenName} />} />
+            <Drawer.Screen name='ika_wari_taa_status' component={Screens.Home.ika_wari_taa_status} />
             <Drawer.Screen name='facture' component={Screens.Home.facture} />
             <Drawer.Screen name='recharge' component={Screens.Home.recharge} />
             <Drawer.Screen name='partenaire' component={Screens.Home.partenaire} />

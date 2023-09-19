@@ -32,6 +32,7 @@ export type userStore = {
     data?: any
     qr_code?: string
     scan_response?: string
+    scan_response_status?: boolean
 }
 
 export type scanModel = {

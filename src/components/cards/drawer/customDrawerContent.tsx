@@ -16,7 +16,6 @@ type COMPONENT_TYPE = { navigation: DrawerNavigationHelpers, screenName: string 
 const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => {
     const dispatch = useDispatch<any>()
 
-
     const call = () => {
         let phoneNumber = ''
 
@@ -76,7 +75,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
                     </TouchableOpacity>
 
                     <TouchableOpacity style={[styles.item_container, { backgroundColor: screenName === 'partenaire' ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('partenaire')}>
-                        <View style={styles.item_icon_name_container} >
+                        <View style={styles.item_icon_name_container}>
                             <FontAwesome name='users' style={styles.item_icon} size={25} color={screenName === 'partenaire' ? colors.white : colors.black} />
                             <Text style={[styles.item_name, { color: screenName === 'partenaire' ? colors.white : colors.black, }]}>Partenaire</Text>
                         </View>

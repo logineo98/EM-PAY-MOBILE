@@ -2,10 +2,12 @@ import thunk from 'redux-thunk'
 import { applyMiddleware, combineReducers, legacy_createStore } from 'redux'
 import userReducer from './user/user.reducer';
 import partnerReducer from './partner/partner.reducer';
+import tarifReducer from './tarif/tarif.reducer';
 
 const reducers = combineReducers({
     user: userReducer,
     partner: partnerReducer,
+    tarif: tarifReducer,
 })
 const Store = legacy_createStore(reducers, applyMiddleware(thunk))
 

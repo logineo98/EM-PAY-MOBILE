@@ -4,6 +4,8 @@ import { _end_point, get_credentials } from '../endpoints'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { get_all_users, get_qr_code, scan_qr_code, user_errors, user_forgot_success, user_loading, user_login_success, user_logout_success, user_register_success, user_reset_success, user_status_geo_montant, user_verify_success } from './user.constant'
 import { Expired, debug } from '../../constants/utils'
+import { StackNavigationHelpers } from '@react-navigation/stack/lib/typescript/src/types'
+import Toast from 'react-native-toast-message'
 
 export const checking = () => async (dispatch: any) => {
     dispatch({ type: 'user_loading' })
@@ -159,7 +161,7 @@ export const getQrCode = (id: string) => async (dispatch: any) => {
     }
 }
 
-export const _scanQrCode = (data: scanModel) => async (dispatch: any) => {
+export const _scanQrCode = (data: scanModel, navigation: StackNavigationHelpers) => async (dispatch: any) => {
     try {
         dispatch({ type: user_loading })
 
@@ -167,9 +169,12 @@ export const _scanQrCode = (data: scanModel) => async (dispatch: any) => {
 
         const response = await axios.post(`${_end_point.customer.scanner_traitement}`, data, { headers: { Authorization: `Bearer ${token}` } })
 
-        dispatch({ type: scan_qr_code, payload: response.data?.info })
+        dispatch({ type: scan_qr_code, payload: response.data })
+
+        navigation.navigate('ika_wari_taa_status', { status: response.data.status })
     } catch (error: any) {
         debug('SCAN QR CODE', error?.response?.data || error.message)
+        Toast.show({ type: 'info', text1: 'Informations', text2: error?.response?.data || error.message })
         dispatch({ type: user_errors, payload: error?.response?.data })
     }
 }

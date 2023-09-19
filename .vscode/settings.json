@@ -10,13 +10,41 @@
         ".bundle": true,
         ".vscode": true,
         "__tests__": true,
-        "ios": true
+        "ios": true,
+        ".eslintrc.js": true,
+        ".gitignore": true,
+        ".prettierrc.js": true,
+        ".watchmanconfig": true,
+        "app.json": true,
+        "babel.config.js": true,
+        "Gemfile": true,
+        "index.js": true,
+        "jest.config.js": true,
+        "metro.config.js": true,
+        "package-lock.json": true,
+        "package.json": true,
+        "README.md": true,
+        "tsconfig.json": true
     },
     "hide-files.files": [
         "node_modules",
         ".bundle",
         ".vscode",
         "__tests__",
-        "ios"
+        "ios",
+        ".eslintrc.js",
+        ".gitignore",
+        ".prettierrc.js",
+        ".watchmanconfig",
+        "app.json",
+        "babel.config.js",
+        "Gemfile",
+        "index.js",
+        "jest.config.js",
+        "metro.config.js",
+        "package-lock.json",
+        "package.json",
+        "README.md",
+        "tsconfig.json"
     ]
 }

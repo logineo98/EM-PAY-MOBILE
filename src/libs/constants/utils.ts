@@ -1,5 +1,3 @@
-
-
 export const format_date = (timestamp: string) => {
     const dateObj = new Date(timestamp);
 
@@ -38,3 +36,13 @@ export function supprimerOccurrence(chaine: string, occurrenceASupprimer: string
 
     return chaineNettoyee;
 }
+
+export const inputSeparatorMille = (v: string, fieldName: string, setInputs: any) => {
+    const inputValue = v.replace(/[^0-9]/g, '') // supprimer tous les caractères qui ne sont pas des chiffres
+    const formattedValue = Number(inputValue).toLocaleString() // ajouter un séparateur de milliers
+    setInputs((prevState: any) => ({ ...prevState, [fieldName]: formattedValue }))
+}
+
+export const formatNumberWithSpaces = (data: string) => data?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+
+export const deleteSeparator = (input: string) => { return input.replace(/\D/g, '') }
