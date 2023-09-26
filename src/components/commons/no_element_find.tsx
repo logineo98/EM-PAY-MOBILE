@@ -10,7 +10,7 @@ type COMPONENT_TYPE = {
 const NoElementFind: FC<COMPONENT_TYPE> = ({ message, size }) => {
 
     const styles = StyleSheet.create({
-        message: { color: colors.black, fontFamily: roboto.black }
+        message: { color: colors.black, fontFamily: roboto.black, textAlign: 'center', }
     })
 
     return <Text style={[styles.message]}> {message} </Text>

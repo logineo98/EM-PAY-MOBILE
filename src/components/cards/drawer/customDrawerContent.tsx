@@ -1,7 +1,7 @@
-import { Alert, Image, Linking, Platform, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, Linking, Platform, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
 import React, { FC } from 'react'
 import { images } from '../../../libs/constants/constants'
-import { colors, height, roboto, width } from '../../../libs/typography/typography'
+import { colors, roboto } from '../../../libs/typography/typography'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -14,6 +14,9 @@ import { useDispatch } from 'react-redux'
 type COMPONENT_TYPE = { navigation: DrawerNavigationHelpers, screenName: string }
 
 const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => {
+
+    const { height, width } = useWindowDimensions()
+
     const dispatch = useDispatch<any>()
 
     const call = () => {
@@ -36,6 +39,13 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
         }
     }
 
+    const handleLogout = () => {
+        Alert.alert('DÉCONNEXION', 'Êtes-vous sûr ?', [
+            { text: 'OUI', onPress: () => dispatch(logout()) },
+            { text: 'NON' }
+        ])
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.close_global_container}>
@@ -45,11 +55,11 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
             </View>
 
             <View style={styles.logo_container}>
-                <Image source={images.logo_png} style={styles.logo} />
+                <Image source={images.logo_png} style={[styles.logo, { height: 108, width: 108, }]} />
             </View>
 
-            <View style={styles.item_global_container}>
-                <ScrollView contentContainerStyle={{}}>
+            <View style={[styles.item_global_container, { height: height - (108 + 110) }]}>
+                <ScrollView contentContainerStyle={{}} showsVerticalScrollIndicator={false}>
                     <TouchableOpacity style={[styles.item_container, { marginTop: 10, backgroundColor: (!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge' || screenName === 'geolocalisation' || screenName === 'historique' || screenName === 'service_client') ? colors.tz_blue : colors.white, }]} activeOpacity={0.5} onPress={() => navigation.navigate('home')}>
                         <View style={styles.item_icon_name_container} >
                             <FontAwesome name='home' style={styles.item_icon} size={25} color={(!screenName || screenName === 'home' || screenName === 'ika_wari_taa' || screenName === 'facture' || screenName === 'recharge' || screenName === 'geolocalisation' || screenName === 'historique' || screenName === 'service_client') ? colors.white : colors.black} />
@@ -108,7 +118,7 @@ const CustomDrawerContent: FC<COMPONENT_TYPE> = ({ navigation, screenName }) => 
                 </ScrollView>
             </View>
 
-            <TouchableOpacity onPress={() => dispatch(logout())} style={{ ...styles.item_container, ...styles.item_container_deconnexion }} activeOpacity={0.5}>
+            <TouchableOpacity onPress={handleLogout} style={{ ...styles.item_container, ...styles.item_container_deconnexion }} activeOpacity={0.5}>
                 <View style={styles.item_icon_name_container} >
                     <MaterialCommunityIcons name='logout' style={styles.item_icon} size={25} color={colors.black} />
                     <Text style={styles.item_name}>Déconnexion</Text>
@@ -127,9 +137,9 @@ const styles = StyleSheet.create({
     container: { flex: 1, padding: 10, },
 
     logo_container: { alignItems: 'center', },
-    logo: { height: width * 0.30, width: width * 0.30, resizeMode: 'contain', },
+    logo: { resizeMode: 'contain', },
 
-    item_global_container: { height: height * 0.66 },
+    item_global_container: {},
 
     item_container: { marginVertical: 5, padding: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 5, },
     item_icon_name_container: { flexDirection: 'row', alignItems: 'center', },

@@ -1,7 +1,7 @@
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
 import React, { FC, useState } from 'react'
 import { images } from '../../libs/constants/constants'
-import { colors, roboto, width } from '../../libs/typography/typography'
+import { colors, roboto, } from '../../libs/typography/typography'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { StackNavigationHelpers } from '@react-navigation/stack/lib/typescript/src/types'
@@ -25,6 +25,8 @@ type COMPONENT_TYPE = {
 
 const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
 
+    const { height, width } = useWindowDimensions()
+
     const [displayCardVerso, setDisplayCardVerso] = useState(false)
     const [show, setShow] = useState(false)
 
@@ -36,7 +38,7 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <TouchableOpacity activeOpacity={0.5} style={styles.virtual_card_global_container} onPress={() => setDisplayCardVerso(prev => !prev)}>
                         {displayCard &&
-                            <View style={styles.virtual_card_container}>
+                            <View style={[styles.virtual_card_container, { width: width * 0.85, }]}>
                                 {!displayCardVerso ?
                                     <Image source={images.virtal_card} style={styles.virtual_card} /> :
                                     <Image source={images.passport} style={styles.virtual_card} />
@@ -112,7 +114,7 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
                     }
                 </ScrollView>
 
-                <View style={styles.bottom_tab_global_container}>
+                <View style={[styles.bottom_tab_global_container, { width: width, }]}>
                     <TouchableOpacity activeOpacity={0.5} style={styles.plus_minus_icon_container} onPress={() => setShow(!show)}>
                         <Entypo name={!show ? 'plus' : 'minus'} size={25} color={colors.white} />
                     </TouchableOpacity>
@@ -121,7 +123,7 @@ const Home: FC<COMPONENT_TYPE> = ({ navigation, displayCard }) => {
                         <View style={styles.bottom_tab_container}>
                             <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('geolocalisation')}>
                                 <MaterialCommunityIcons name='map-marker-radius-outline' size={25} color={colors.black} />
-                                <Text style={styles.bottom_tab_name}>Carte géolocalisation</Text>
+                                <Text style={styles.bottom_tab_name}>Géolocalisation</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity activeOpacity={0.5} style={styles.bottom_tab} onPress={() => navigation.navigate('historique')}>
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
     home_container: { flex: 1, padding: 10, },
 
     virtual_card_global_container: { alignItems: 'center' },
-    virtual_card_container: { height: 200, width: width * 0.85, borderWidth: 1, borderColor: colors.fond1, borderRadius: 5, padding: 2 },
+    virtual_card_container: { height: 200, borderWidth: 1, borderColor: colors.fond1, borderRadius: 5, padding: 2 },
     virtual_card: { height: '100%', width: '100%', resizeMode: 'cover', borderRadius: 5 },
 
     solde_container: { backgroundColor: colors.fond1, marginVertical: 20, flexDirection: 'row', justifyContent: 'center', borderRadius: 5, padding: 5 },
@@ -170,7 +172,7 @@ const styles = StyleSheet.create({
     partenaire_logo_container: { alignItems: 'center', justifyContent: 'center', height: 60, width: 60, borderRadius: 60, marginRight: 10, borderWidth: 1, borderColor: colors.fond1, },
     partenaire_logo: { height: '100%', width: '100%', resizeMode: 'contain', borderRadius: 60 },
 
-    bottom_tab_global_container: { width: width, paddingVertical: 5, position: 'absolute', bottom: 0, alignItems: 'center', justifyContent: 'center', },
+    bottom_tab_global_container: { paddingVertical: 5, position: 'absolute', bottom: 0, alignItems: 'center', justifyContent: 'center', },
     plus_minus_icon_container: { backgroundColor: colors.tz_blue, height: 40, width: 40, borderRadius: 40, alignItems: 'center', justifyContent: 'center', },
     bottom_tab_container: { backgroundColor: colors.white, width: '95%', flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 5, borderRadius: 10, },
     bottom_tab: { alignItems: 'center', justifyContent: 'center', },

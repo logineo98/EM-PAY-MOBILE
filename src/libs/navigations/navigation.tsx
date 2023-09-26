@@ -26,9 +26,13 @@ const Navigation: FC<COMPONENT_TYPE> = ({ route }) => {
 
     useEffect(() => {
         dispatch(checking())
-        if (screenName !== 'ika_wari_taa' && screenName !== 'ika_wari_taa_status') { dispatch(getAllusers()) }
 
-        if (screenName === undefined || screenName === 'partenaire' || screenName === 'home') dispatch(getAllPartners())
+        if (screenName === undefined || screenName === 'home' || screenName === 'geolocalisation' || screenName === 'status')
+            dispatch(getAllusers())
+
+        if (screenName === undefined || screenName === 'partenaire' || screenName === 'home')
+            dispatch(getAllPartners())
+
         if (screenName === 'tarif') dispatch(getAllTarifs())
     }, [screenName, dispatch])
 

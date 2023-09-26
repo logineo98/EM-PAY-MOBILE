@@ -86,3 +86,20 @@ export const status_geo_montant_request = (montant: string) => {
 
     return { error, initialError }
 }
+
+/****************************VITEPAY VALIDATION DATA*********************************** */
+export const vitepay_data_validation = (data: { phone: string, montant: string }) => {
+    const { phone, montant } = data
+    const phone_regex = /^[789][0-9]{7}$/
+
+    const initialError = { phone: '', montant: '' }
+    let error = initialError
+
+    if (!phone || phone.trim() === '') error = { ...error, phone: 'Veuillez renseigner le champ.' }
+    else if (!phone_regex.test(phone)) error = { ...error, phone: 'Doit être un numéro ORANGE.' }
+
+    if (!montant || montant.trim() === '') error = { ...error, montant: 'Veuillez renseigner le champ.' }
+    else if (parseInt(montant, 10) < 500) error = { ...error, montant: 'Montant doit être superieur à 500 FCFA.' }
+
+    return { error, initialError }
+}

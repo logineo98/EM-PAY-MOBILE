@@ -9,7 +9,7 @@ export const get_credentials = async (type: string) => {
         const usr = cred.usr
 
         if (type === 'accessToken') return accessToken;
-        else if (type === 'expiresIn') return new Date().getTime() + parseInt(expiresIn);
+        else if (type === 'expiresIn') parseInt(expiresIn);
         else if (type === 'usr') return usr;
     }
 }

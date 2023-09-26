@@ -33,6 +33,10 @@ const Historique = () => {
         { id: '5', price: 25000 },
     ]
 
+    const handleDownLoad = () => {
+        console.log('Téléchargement du PDF.')
+    }
+
     return (
         <components.commons.screen_container title='Historiques'>
             <>
@@ -48,7 +52,12 @@ const Historique = () => {
                     </TouchableOpacity>
                 </View>
 
-                <Text style={styles.menu_selected}>{choose.retrait ? 'Retrait' : choose.achat ? 'Achat' : choose.recharge && 'Recharge'}</Text>
+                <View style={styles.download_container}>
+                    <Text style={styles.menu_selected}>{choose.retrait ? 'Retrait' : choose.achat ? 'Achat' : choose.recharge && 'Recharge'}</Text>
+                    <TouchableOpacity style={styles.download} activeOpacity={0.5} onPress={handleDownLoad}>
+                        <Text style={styles.download_texte}>Télécharger en PDF</Text>
+                    </TouchableOpacity>
+                </View>
 
                 {choose.retrait &&
                     <FlatList
@@ -86,7 +95,10 @@ const styles = StyleSheet.create({
     menu: { width: '30%', padding: 5, borderRadius: 5, },
     menu_name: { color: colors.white, fontFamily: roboto.regular, textAlign: 'center', },
 
+    download_container: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 5, },
     menu_selected: { color: colors.black, fontFamily: roboto.black, textTransform: 'uppercase', marginVertical: 10, },
+    download: { backgroundColor: colors.fond2, padding: 5, borderRadius: 5 },
+    download_texte: { color: colors.black, fontFamily: roboto.regular, textTransform: 'uppercase', },
 
 })
 

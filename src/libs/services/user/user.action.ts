@@ -41,6 +41,9 @@ export const authentification = (data: userModel) => async (dispatch: any) => {
         dispatch({ type: user_loading })
 
         const res = await axios.post(_end_point.customer.login, data)
+
+        res.data.expiresIn = new Date().getTime() + parseInt(res.data.expiresIn)
+
         await AsyncStorage.setItem('credentials', JSON.stringify(res.data))
 
         dispatch({ type: user_login_success, payload: res.data })
@@ -90,6 +93,9 @@ export const reset_password = (data: userModel) => async (dispatch: any) => {
     try {
         dispatch({ type: user_loading })
         const res = await axios.post(_end_point.customer.reset, data)
+
+        res.data.expiresIn = new Date().getTime() + parseInt(res.data.expiresIn)
+
         await AsyncStorage.setItem('credentials', JSON.stringify(res.data))
 
         dispatch({ type: user_reset_success, payload: res.data })
