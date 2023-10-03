@@ -15,7 +15,8 @@
         "errors": {
             "phone_field_empty": "Un numéro de téléphone est requis.",
             "password_field_empty": "Un mot de passe est requis.",
-            "incorrect": "Un numéro de téléphone ou mot de passe incorrect."
+            "incorrect": "Un numéro de téléphone ou mot de passe incorrect.",
+            "signature_condition": "Veuillez accepter les conditions générales d'abord."
         }
     },
     "inscription_screen": {

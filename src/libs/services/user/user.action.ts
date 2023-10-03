@@ -2,10 +2,11 @@ import axios from 'axios'
 import { scanModel, statusGeoMontantType, userModel } from './user.model'
 import { _end_point, get_credentials } from '../endpoints'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { get_all_users, get_qr_code, scan_qr_code, user_errors, user_forgot_success, user_loading, user_login_success, user_logout_success, user_register_success, user_reset_success, user_status_geo_montant, user_verify_success } from './user.constant'
+import { get_all_users, get_qr_code, scan_qr_code, user_errors, user_forgot_success, user_loading, user_login_success, user_logout_success, user_register_success, user_resent_success, user_reset_success, user_status_geo_montant, user_verify_success } from './user.constant'
 import { Expired, debug } from '../../constants/utils'
 import { StackNavigationHelpers } from '@react-navigation/stack/lib/typescript/src/types'
 import Toast from 'react-native-toast-message'
+import { connexion_request, forgot_request, reset_request, verify_request } from './user.request'
 
 export const checking = () => async (dispatch: any) => {
     dispatch({ type: 'user_loading' })
@@ -36,8 +37,11 @@ const profile = () => async (dispatch: any) => {
     }
 }
 
-export const authentification = (data: userModel) => async (dispatch: any) => {
+export const login = (data: userModel, setError: any) => async (dispatch: any) => {
     try {
+
+        if (connexion_request(data, setError)) return;
+
         dispatch({ type: user_loading })
 
         const res = await axios.post(_end_point.customer.login, data)
@@ -65,8 +69,10 @@ export const logout = () => async (dispatch: any) => {
     }
 }
 
-export const forgot_password = (data: userModel) => async (dispatch: any) => {
+export const forgot_password = (data: userModel, setError: any) => async (dispatch: any) => {
     try {
+        if (forgot_request(data, setError)) return;
+
         dispatch({ type: user_loading })
         const res = await axios.post(_end_point.customer.forgot, data)
 
@@ -77,8 +83,10 @@ export const forgot_password = (data: userModel) => async (dispatch: any) => {
     }
 }
 
-export const forgot_verify = (data: userModel) => async (dispatch: any) => {
+export const forgot_verify = (data: userModel, setError: any) => async (dispatch: any) => {
     try {
+        if (verify_request(data, setError)) return;
+
         dispatch({ type: user_loading })
         const res = await axios.post(_end_point.customer.verify, data)
 
@@ -89,13 +97,29 @@ export const forgot_verify = (data: userModel) => async (dispatch: any) => {
     }
 }
 
-export const reset_password = (data: userModel) => async (dispatch: any) => {
+
+export const resent_code = (data: userModel, setError: any) => async (dispatch: any) => {
     try {
+        if (forgot_request(data, setError)) return;
+
+        dispatch({ type: user_loading })
+        const res = await axios.post(_end_point.customer.forgot, data)
+
+        dispatch({ type: user_resent_success, payload: res.data })
+    } catch (error: any) {
+        debug('USER RESENT CODE PASSWORD ACTION', error?.response?.data || error.message)
+        dispatch({ type: user_errors, payload: error?.response?.data })
+    }
+}
+
+export const reset_password = (data: userModel, setError: any) => async (dispatch: any) => {
+    try {
+        if (reset_request(data, setError)) return;
+
         dispatch({ type: user_loading })
         const res = await axios.post(_end_point.customer.reset, data)
 
         res.data.expiresIn = new Date().getTime() + parseInt(res.data.expiresIn)
-
         await AsyncStorage.setItem('credentials', JSON.stringify(res.data))
 
         dispatch({ type: user_reset_success, payload: res.data })

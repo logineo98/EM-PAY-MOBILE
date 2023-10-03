@@ -11,14 +11,15 @@ export type userModel = {
     code?: string
     email?: string
     account?: string
-    profil?: string
-    document?: ""
+    profil?: any
+    document?: any
     password?: string
     confirm?: string
     birthday?: Date
     signature?: any
     montant?: string
-    coordinates?: coordinateType
+    coordinates?: coordinateType,
+    isChecked?: boolean
 }
 
 export type userStore = {
@@ -27,9 +28,9 @@ export type userStore = {
     user?: userModel | null
     allUsers?: userModel[]
     host?: userModel | null
-    tmp?: boolean
-    info?: string | null
-    data?: any
+    user_tmp?: boolean
+    user_info?: string | null
+    user_data?: any
     qr_code?: string
     scan_response?: string
     scan_response_status?: boolean

@@ -1,5 +1,4 @@
 import { Dimensions } from "react-native"
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 export const roboto = {
@@ -23,6 +22,7 @@ export const colors = {
 
     white: "#ffffff",
     black: "#000000",
+    line: "#262626",
     auth_icon: "rgba(0,0,0,0.5)",
     placeholder: "rgba(0,0,0,0.2)",
     divider: "rgba(0,0,0,0.2)",
@@ -33,4 +33,3 @@ export const colors = {
 }
 
 export const { height, width } = Dimensions.get('window')
-export { hp, wp }

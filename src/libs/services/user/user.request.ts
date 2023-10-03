@@ -1,78 +1,82 @@
 import { userModel } from "./user.model";
-import { connexion_screen } from "../../i18n/fr.FR.json"
+import { connexion_screen, inscription_screen } from "../../i18n/fr.FR.json"
 
 /****************************CONNEXION*********************************** */
-export const connexion_request = (toStore: userModel) => {
-    let error = { login_phone_error: '', login_password_error: '' }
+export const connexion_request = (toStore: userModel, setError: any) => {
+    let error = false;
 
-    if (!toStore.phone || toStore.phone === "") error = { login_phone_error: connexion_screen.errors.phone_field_empty, login_password_error: '' }
-    if (!toStore.password || toStore.password === "") error = { ...error, login_password_error: connexion_screen.errors.password_field_empty }
-    else if (toStore.password.length < 6) error = { login_phone_error: '', login_password_error: connexion_screen.errors.incorrect }
-    return error;
+    if (!toStore.phone || toStore.phone === "") { setError(connexion_screen.errors.phone_field_empty); error = true }
+    if (!toStore.password || toStore.password === "") { setError(connexion_screen.errors.password_field_empty); error = true }
+    else if (toStore.password.length < 6) { setError(connexion_screen.errors.incorrect); error = true }
+
+    if (error) return true; else return false;
 }
 
-export const forgot_request = (toStore: userModel) => {
-    let error = { forgot_phone_error: '' }
-
-    if (!toStore.phone || toStore.phone === "") error = { forgot_phone_error: connexion_screen.errors.phone_field_empty }
-    return error;
+export const forgot_request = (toStore: userModel, setError: any) => {
+    let error = false;
+    if (!toStore.phone || toStore.phone === "") { setError(connexion_screen.errors.phone_field_empty); error = true }
+    if (error) return true; else return false;
 }
 
-export const verify_request = (code: string, size: number) => {
-    let error = { verify_phone_error: '' }
-
-    if (!code || code === "") error = { verify_phone_error: connexion_screen.errors.phone_field_empty }
-    if (code && code?.length < size) error = { verify_phone_error: connexion_screen.errors.phone_field_empty }
-    return error;
+export const verify_request = (toStore: userModel, setError: any) => {
+    let error = false;
+    if (!toStore.code || toStore.code === "") { setError("Le code de vérification est requis."); error = true }
+    else if (!toStore.id || toStore.id === "") { setError("L'identifiant de l'utilisateur est requis."); error = true }
+    if (error) return true; else return false;
 }
 
-export const reset_request = (toStore: userModel) => {
-
-    let error = { reset_password_error: '', reset_confirm_error: '' }
-    if (!toStore.password || toStore.password === "") error = { reset_password_error: connexion_screen.errors.password_field_empty, reset_confirm_error: '' }
-    if (toStore.password && toStore.password.length < 6) error = { reset_password_error: connexion_screen.errors.incorrect, reset_confirm_error: connexion_screen.errors.incorrect }
-    if (toStore.password !== toStore.confirm) error = { reset_password_error: connexion_screen.errors.incorrect, reset_confirm_error: connexion_screen.errors.incorrect }
-    return error;
+export const reset_request = (toStore: userModel, setError: any) => {
+    let error = false;
+    if (!toStore.password || toStore.password === "") { setError(connexion_screen.errors.password_field_empty); error = true }
+    else if (toStore.password && toStore.password.length < 6) { setError(connexion_screen.errors.incorrect); error = true }
+    else if (toStore.password !== toStore.confirm) { setError(connexion_screen.errors.incorrect); error = true }
+    if (error) return true; else return false;
 }
 
 /****************************INSCRIPTION*********************************** */
 
-export const inscription_inputs_request = (type: string, toStore: userModel) => {
-    var errors = { phone_error: '', name_error: '', firstname_error: '', birth_error: '', address_error: '', email_error: '', document_error: '', profil_error: '', signature_error: '', password_error: '', confirm_error: '' }
+export const inscription_inputs_request = (type: string, toStore: userModel, setError: any) => {
     switch (type) {
         case "infos":
-            if (!toStore.phone || toStore.phone === "") errors = { ...errors, phone_error: connexion_screen.errors.password_field_empty }
-            if (!toStore.name || toStore.name === "") errors = { ...errors, name_error: connexion_screen.errors.incorrect, }
-            if (!toStore.firstname || toStore.firstname === "") errors = { ...errors, firstname_error: connexion_screen.errors.incorrect, }
-            if (!toStore.birthday || toStore.birthday === null) errors = { ...errors, birth_error: connexion_screen.errors.incorrect, }
-            return errors
+            let error_info = false;
+            if (!toStore.phone || toStore.phone === "") { setError(inscription_screen.infos.phone_field); error_info = true }
+            else if (!toStore.name || toStore.name === "") { setError(inscription_screen.infos.name); error_info = true }
+            else if (!toStore.firstname || toStore.firstname === "") { setError(inscription_screen.infos.firstname); error_info = true }
+            else if (!toStore.birthday || toStore.birthday === null) { setError(inscription_screen.infos.birth); error_info = true }
+            if (error_info) return true; else return false;
 
         case "account":
-            if (!toStore.address || toStore.address === "") errors = { ...errors, address_error: connexion_screen.errors.password_field_empty }
-            if (!toStore.email || toStore.email === "") errors = { ...errors, email_error: connexion_screen.errors.incorrect, }
-            return errors
+            let error_account = false;
+            if (!toStore.address || toStore.address === "") { setError(inscription_screen.account.errors.address_field_empty); error_account = true }
+            else if (!toStore.email || toStore.email === "") { setError(inscription_screen.account.errors.email_field_empty); error_account = true }
+            if (error_account) return true; else return false;
 
         case "document":
-            if (!toStore.document || toStore.document === "")
-                errors = { ...errors, document_error: connexion_screen.errors.password_field_empty }
-            return errors
+            let error_document = false;
+            if (!toStore.document || toStore.document === "") { setError(inscription_screen.document.errors.choice); error_document = true }
+            if (error_document) return true; else return false;
+
 
         case "selfie":
-            if (!toStore.profil || toStore.profil === "") errors = { ...errors, profil_error: connexion_screen.errors.password_field_empty }
-            return errors
+            let error_profile = false;
+            if (!toStore.profil || toStore.profil === "") { setError(inscription_screen.identity.selfie.errors.photo); error_profile = true }
+            if (error_profile) return true; else return false;
 
 
         case "signature":
-            if (!toStore.signature || toStore.signature === null) errors = { ...errors, signature_error: connexion_screen.errors.password_field_empty }
-            return errors
+            let error_signature = false;
+            if (!toStore.signature || toStore.signature === "") { setError(inscription_screen.identity.signature.errors.signature); error_signature = true }
+            else if (!(toStore as any)?.isChecked) { setError(inscription_screen.identity.signature.errors.authorize); error_signature = true }
+            if (error_signature) return true; else return false;
 
-        case "reset":
-            if (!toStore.password || toStore.password === "") errors = { ...errors, password_error: connexion_screen.errors.password_field_empty }
-            if (!toStore.confirm || toStore.confirm === "") errors = { ...errors, confirm_error: connexion_screen.errors.incorrect, }
-            else if (toStore.password && toStore.password.length < 6) errors = { ...errors, confirm_error: connexion_screen.errors.incorrect, }
-            return errors
+        case "finalisation":
+            let error_reset = false;
+            if (!toStore.password || toStore.password === "") { setError(inscription_screen.identity.finalisation.errors.password_empty); error_reset = true }
+            else if (!toStore.confirm || toStore.confirm === "") { setError(inscription_screen.identity.finalisation.errors.confirm_empty); error_reset = true }
+            else if (toStore.password && toStore.password.length < 6) { setError(inscription_screen.identity.finalisation.errors.password_size); error_reset = true }
+            if (error_reset) return true; else return false;
 
-        default: return errors
+        default: return false
     }
 }
 
